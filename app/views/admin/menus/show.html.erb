@@ -1,0 +1,49 @@
+<%= render 'admin/common/header' %>
+<%= render 'admin/common/sidebar' %>
+<!-- administrator main content start -->
+<div id="content">
+<div id="sub_content">
+	
+	<h1><%= t('title.group.title') %>&nbsp;-&nbsp;<%= @group.title %>&nbsp;-&nbsp;<%= t('admin.menu.menu') %></h1></h1>
+</div>
+
+
+<p>
+  <strong><%= t('title.menu.group')%></strong>
+  <%= @group.title %>
+</p>
+<p>
+  <strong><%= t('title.menu.name')%></strong>
+  <%= @admin_menu.name %>
+</p>
+
+<p>
+  <strong><%= t('title.menu.title')%></strong>
+  <%= @admin_menu.title %>
+</p>
+<p>
+  <strong><%= t('title.menu.type')%></strong>
+  <%= @parent_menu[@admin_menu.menutype] %>
+</p>
+<p>
+  <strong><%= t('title.menu.parent')%></strong>
+  <%= @parent_menu[@admin_menu.parent_id] %>
+</p>
+
+<p>
+  <strong><%= t('title.menu.icon')%></strong>
+  <%= @admin_menu.icon %>
+</p>
+<p>
+  <strong><%= t('title.vieworder')%></strong>
+  <%= @admin_menu.vieworder %>
+</p>
+
+<br /><br />
+<%= link_to t('label.back'), list_admin_menu_path(@admin_menu.group_id),:class=>"button_link" %>
+<%= link_to t('label.edit'), edit_admin_menu_path(@admin_menu),:class=>"button_link" %>
+
+
+
+</div><!-- administrator main content end -->
+<%= render 'admin/common/footer' %>

@@ -1,0 +1,51 @@
+<div id="setting">
+<%= form_for(@admin_menu) do |f| %>
+  <% if @admin_menu.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_menu.errors.count,"error" )%> <%= t('error.menu.message') %></h2>
+
+      <ul>
+      <% @admin_menu.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+ <div class="field">
+    <%= @group.title %>
+    <%= f.hidden_field :group_id, :value => @group.id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+   
+    <div class="field">
+    <%= f.label :menutype %><br>
+    <%= f.select :menutype,@select_type.keys.map{|t| [@select_type[t], t]} %>
+  </div>
+  <div class="field">
+    <%= f.label :parent_id %><br>
+    <%= f.select :parent_id,@parent_menu.keys.map{|t| [@parent_menu[t], t]} %>
+  </div>
+  <div class="field">
+    <%= f.label :icon %><br>
+    <%= f.text_field :icon %>
+    <a target="_blank" href="http://fortawesome.github.io/Font-Awesome/3.2.1/icons/">Font-Awesome</a>
+  </div>
+  <div class="field">
+    <%= f.label :vieworder %><br>
+    <%= f.number_field :vieworder %>
+  </div>
+  <div class="actions">
+    <%= f.submit t('helpers.submit.update'),:class=>"button_admin" %>
+  </div>
+<% end %>
+</div>

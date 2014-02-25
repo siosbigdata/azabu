@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  title: MyString
+  graphtype: 1
+  term: 1
+  y_min: 9.99
+  y_unit: MyString
+  linewidth: 1
+  useval: 1
+  useshadow: 1
+  usetip: 1
+  template: MyString
+
+two:
+  name: MyString
+  title: MyString
+  graphtype: 1
+  term: 1
+  y_min: 9.99
+  y_unit: MyString
+  linewidth: 1
+  useval: 1
+  useshadow: 1
+  usetip: 1
+  template: MyString

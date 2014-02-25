@@ -1,0 +1,41 @@
+<%= render 'admin/common/header' %>
+<%= render 'admin/common/sidebar' %>
+<!-- administrator main content start -->
+<div id="content">
+<div id="sub_content">
+	
+	<h1><%= t('admin.menu.mergegraph') %>&nbsp;-&nbsp;<%= t('label.show') %></h1>
+</div>
+
+<p>
+  <strong><%= t('title.merge.title')%></strong>
+  <%= @merge.title %>
+</p>
+
+<p>
+  <strong><%= t('title.graph.title')%></strong>
+  <%= @graphs[@mergegraph.graph_id] %>
+</p>
+
+<p>
+  <strong><%= t('title.merge.side')%></strong>
+  <%= @side[@mergegraph.side] %>
+</p>
+
+<p>
+  <strong><%= t('title.graph.y')%></strong>
+  <%= @mergegraph.y %>
+</p>
+
+<p>
+  <strong><%= t('title.vieworder')%></strong>
+  <%= @mergegraph.vieworder %>
+</p>
+<br /><br />
+<%= link_to t('label.back'), list_admin_mergegraph_path(@mergegraph.merge_id),:class=>"button_link" %>
+<%= link_to t('label.edit'), edit_admin_mergegraph_path(@mergegraph),:class=>"button_link" %>
+
+
+
+</div><!-- administrator main content end -->
+<%= render 'admin/common/footer' %>

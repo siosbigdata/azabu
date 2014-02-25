@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  graph_id: 1
+  name: MyString
+  term: 1
+  cal_at: 2014-02-21
+
+two:
+  graph_id: 1
+  name: MyString
+  term: 1
+  cal_at: 2014-02-21

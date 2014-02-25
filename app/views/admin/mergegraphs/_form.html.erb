@@ -1,0 +1,38 @@
+<%= form_for(@mergegraph) do |f| %>
+  <% if @mergegraph.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mergegraph.errors.count, "error") %> prohibited this mergegraph from being saved:</h2>
+
+      <ul>
+      <% @mergegraph.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<br/>
+  <div class="field">
+    <%= @merge.title %>
+    <%= f.hidden_field :merge_id, :value => @merge.id %>
+  </div>
+  <div class="field">
+    <%= f.label :graph %><br>
+    <%= f.collection_select :graph_id,Graph.find(:all),:id,:title %>
+  </div>
+  <div class="field">
+    <%= f.label :side %><br>
+    <%= f.select :side,@side.keys.map{|t| [@side[t], t]} %>
+  </div>
+  <div class="field">
+    <%= f.label :y %><br>
+    <%= f.text_field :y %>
+  </div>
+  <div class="field">
+    <%= f.label :vieworder %><br>
+    <%= f.number_field :vieworder %>
+  </div>
+  <div class="actions">
+    <%= f.submit t('helpers.submit.update'),:class=>"button_admin" %>
+  </div>
+<% end %>

@@ -1,0 +1,41 @@
+<%= render 'admin/common/header' %>
+<%= render 'admin/common/sidebar' %>
+<!-- administrator main content start -->
+<div id="content">
+<div id="sub_content">
+	<h1><%= t('admin.menu.graph') %></h1>
+</div>
+<table class="coder">
+  <thead>
+    <tr>
+      <th><%= t('title.graph.name') %></th>
+      <th><%= t('title.graph.title') %></th>
+      <th><%= t('title.graph.analysis_type') %></th>
+      <th><%= t('title.graph.graph_type') %></th>
+      <th><%= t('title.graph.term') %></th>
+      <th><%= t('title.graph.y') %></th>
+      <th><%= t('title.graph.template') %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_graphs.each do |admin_graph| %>
+      <tr>
+        <td><%= link_to admin_graph.name, edit_admin_graph_path(admin_graph) %></td>
+        <td><%= admin_graph.title %></td>
+        <td><%= @h_analysis_types[admin_graph.analysis_type] %></td>
+        <td><%= @h_graph_types[admin_graph.graph_type] %></td>
+        <td><%= @h_terms[admin_graph.term] %></td>
+        <td><%= admin_graph.y %></td>
+        <td><%= @h_template[admin_graph.template] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br />
+<% if @usecreate %>
+<%= link_to t('label.new'), new_admin_graph_path,:class=>"button_link" %>
+<% end %>
+
+</div><!-- administrator main content end -->
+<%= render 'admin/common/footer' %>

@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  group_id: 1
+  level: 1
+  parent_id: 1
+  name: MyString
+  title: MyString
+  vieworder: 1
+  icon: MyString
+  menutype: 1
+
+two:
+  group_id: 1
+  level: 1
+  parent_id: 1
+  name: MyString
+  title: MyString
+  vieworder: 1
+  icon: MyString
+  menutype: 1

@@ -1,0 +1,64 @@
+<!-- navigation start -->
+<div id="navigation">
+	<ul class="cds-navi">
+<% if false %>
+		<li<% if params[:controller] == "dashboards" %> class="select"<% end %>><%= link_to(root_path) do %><i class="icon-desktop"></i>&nbsp;<%= t('title_dashboard') %><% end %></li>
+		<% current_graph_menu.each do |m| %>
+			<li<% if params[:controller] == "graphs" && m.id == @graph.id %> class="select"<% end %>>
+				<%= link_to(graph_path(m.id)) do %>
+					<% if m.graph_type == 0 %>
+					<i class="icon-picture"></i>
+					<% else %>
+					<i class="icon-bar-chart"></i>
+					<% end %>
+					&nbsp;<%= m.title %>
+				<% end %>
+			</li>
+		<% end %>
+<% end %>
+		<% pid = 0 %>
+		<% level = 0 %>
+		<% current_menu.each do |m| %>
+			<% if m.parent_id == 0
+				pid = 0
+				level = 0
+			elsif m.parent_id != pid
+				pid = m.parent_id
+				level += 1
+			end %>
+			<% if m.menutype === 0 #ラベル %>
+				<li>
+				<a href="javascript:void(0);">
+				<% for num in 0..level %>&nbsp;&nbsp;<% end %>
+				<i class="<%= m.icon %>"></i>
+				&nbsp;<%= m.title %>
+				</a>
+			<% elsif m.menutype === 1 #ダッシュボード %>
+				<li <% if @menu_dashboard_id.to_i === m.id.to_i %> class="select"<% end %>>
+				<%= link_to(dashboard_path(m.id)) do %>
+				<% for num in 0..level %>&nbsp;&nbsp;<% end %>
+				<i class="<%= m.icon %>"></i>
+				&nbsp;<%= m.title %>
+				<% end %>
+			<% elsif m.menutype === 2 #グラフ %>
+				<% gf = Graph.find_by_name(m.name) %>
+				<li <% if params[:id] == gf.id.to_s && @merge == nil && @menu_dashboard_id==nil %> class="select"<% end %>>
+				<%= link_to(graph_path(gf.id)) do %>
+				<% for num in 0..level %>&nbsp;&nbsp;<% end %>
+				<i class="<%= m.icon %>"></i>
+				&nbsp;<%= m.title %>
+				<% end %>
+			<% elsif m.menutype === 3 #マージ %>
+				<% mg = Merge.find_by_name(m.name) %>
+				<li <% if params[:id] == mg.id.to_s && @graph == nil && @menu_dashboard_id==nil %> class="select"<% end %>>
+				<%= link_to(merge_path(mg.id)) do %>
+				<% for num in 0..level %>&nbsp;&nbsp;<% end %>
+				<i class="<%= m.icon %>"></i>
+				&nbsp;<%= m.title %>
+				<% end %>
+			<% end %>
+			
+		</li>
+		<% end %>
+	</ul>
+</div><!-- navigation end -->

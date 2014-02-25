@@ -1,0 +1,45 @@
+<div id="setting">
+<%= form_for(@admin_setting) do |f| %>
+  <% if @admin_setting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_setting.errors.count, "error") %> <%= t('error_setting_message') %></h2>
+
+      <ul>
+      <% @admin_setting.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= t('title.setting.name') %><br>
+    <%= @admin_setting.title %>
+  </div>
+  <div class="field">
+    <%= f.label :parameter %><br>
+	<% if @admin_setting.name == "graph_width" || @admin_setting.name == "graph_height" %>
+		<%= f.number_field :parameter,{:min => 200,:max => 1024} %>
+	<% elsif @admin_setting.name == "week_startday" %>
+		<%= f.select :parameter,@select_week %>
+	<% elsif @admin_setting.name == "base_term" %>
+		<%= f.select :parameter,@h_terms.keys.map{|t| [@h_terms[t], t]} %>
+	<% elsif @admin_setting.columntype == 2 %>
+        <%= f.select :parameter,@select_yes_no.keys.map{|t| [@select_yes_no[t],t]} %>
+    <% elsif @admin_setting.columntype == 3 %>
+        <%= f.number_field :parameter,{:min => 1,:max => 9} %>
+    <% elsif @admin_setting.columntype == 4 %>
+    	<%= f.text_field :parameter ,:id=>"datepicker"%>
+	<% else %>
+        <%= f.text_field :parameter %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit t('helpers.submit.update'),:class=>"button_admin" %>
+  </div>
+<% end %>
+</div>
+<script>
+	$j(document).ready(function(){
+    	$j( "#datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
+	});
+</script>

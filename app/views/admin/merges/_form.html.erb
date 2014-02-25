@@ -1,0 +1,31 @@
+<div id="setting">
+	<%= form_for(@admin_merge) do |f| %>
+  <% if @admin_merge.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_merge.errors.count, "error") %> prohibited this merge from being saved:</h2>
+
+      <ul>
+      <% @admin_merge.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :term %><br>
+    <%= f.select :term,@h_terms.keys.map{|t| [@h_terms[t], t]} %>
+  </div>
+  <div class="actions">
+    <%= f.submit t('helpers.submit.update'),:class=>"button_admin" %>
+  </div>
+<% end %>
+</div>

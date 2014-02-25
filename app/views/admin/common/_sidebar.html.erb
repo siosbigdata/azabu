@@ -1,0 +1,13 @@
+<!-- administrator navigation start -->
+<div id="navigation">
+	<ul class="cds-navi">
+		<li<% if params[:controller] == "admin/home" %> class="select"<% end %>><%= link_to(admin_root_path) do %><i class="icon-desktop"></i>&nbsp;<%= t('admin.menu.home') %><% end %></li>
+		<li<% if params[:controller] == "admin/users" %> class="select"<% end %>><%= link_to(admin_users_path) do %><i class="icon-user"></i>&nbsp;<%= t('admin.menu.user') %><% end %></li>
+		<li<% if params[:controller] == "admin/groups" || params[:controller] == "admin/groupgraphs" %> class="select"<% end %>><%= link_to(admin_groups_path) do %><i class="icon-group"></i>&nbsp;<%= t('admin.menu.group') %><% end %></li>
+		<li<% if params[:controller] == "admin/graphs" %> class="select"<% end %>><%= link_to(admin_graphs_path) do %><i class="icon-bar-chart"></i>&nbsp;<%= t('admin.menu.graph') %><% end %></li>
+		<li<% if params[:controller] == "admin/merges" %> class="select"<% end %>><%= link_to(admin_merges_path) do %><i class="icon-tasks"></i>&nbsp;<%= t('admin.menu.merge') %><% end %></li>
+		<li<% if params[:controller] == "admin/settings" %> class="select"<% end %>><%= link_to(admin_settings_path) do %><i class="icon-cog"></i>&nbsp;<%= t('admin.menu.setting') %><% end %></li>
+	</ul>
+</div>
+<!-- administrator navigation end -->
+<!-- select http://fortawesome.github.io/Font-Awesome/3.2.1/icons/ -->

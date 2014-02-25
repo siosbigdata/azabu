@@ -1,0 +1,40 @@
+<%= render 'admin/common/header' %>
+<%= render 'admin/common/sidebar' %>
+<!-- administrator main content start -->
+<div id="content">
+<div id="sub_content">
+	
+	<h1><%= t('title.merge.title') %>:<%= @merge.title %>&nbsp;-&nbsp;<%= t('admin.menu.mergegraph') %></h1>
+</div>
+
+<table class="coder">
+  <thead>
+    <tr>
+      <th><%= t('title.graph.title') %></th>
+      <th><%= t('title.merge.side') %></th>
+      <th><%= t('title.graph.y') %></th>
+      <th><%= t('title.vieworder') %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mergegraphs.each do |mergegraph| %>
+      <tr>
+      	<td><%= link_to @graphs[mergegraph.graph_id], edit_admin_mergegraph_path(mergegraph) %></td>
+        <td><%= @side[mergegraph.side] %></td>
+        <td><%= mergegraph.y %></td>
+        <td><%= mergegraph.vieworder %></td>
+        <td><%= link_to t('label.delete'), mergegraph, method: :delete, data: { confirm: t('message.delete') } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to t('label.new'), new_admin_mergegraph_path(:merge_id => @merge.id ),:class=>"button_link" %>
+
+
+</div><!-- administrator main content end -->
+<%= render 'admin/common/footer' %>

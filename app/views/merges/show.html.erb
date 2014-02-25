@@ -1,0 +1,115 @@
+<%= render 'common/header' %>
+<%= render 'common/sidebar' %>
+<!-- main content start -->
+
+<div id="content">
+<div id="sub_content">
+	<h1><i class="<%= @gmenu.icon %>"></i>&nbsp;<%= @merge.title %>
+	</h1>
+</div>
+<div id="search">
+	<div class="search_form">
+		<%= form_tag(setday_merge_path) do %>
+		<%= hidden_field_tag(:term,@merge_term) %>
+		<span>
+			<input type="text" id="cal1" name="sday" value="<%= @sdayval %>"></input>
+			&nbsp;-&nbsp;
+			<input type="text" id="cal2" name="eday" value="<%= @edayval %>"></input>	
+		</span>
+
+		<%= submit_tag t('label.search'),:class=>'button' %>
+	<% end %>
+	</div>
+
+</div>
+<div id="term_button" class="data_btn">
+	<% if @merge_term == 0 %>
+	<a href="javascript:void(0);" class="term_button select"><%= t('term.hour') %></a>
+	<% elsif @merge_term == 1 %>
+	<a href="javascript:void(0);" class="term_button select"><%= t('term.day') %></a>
+	<% elsif @merge_term == 2 %>
+	<a href="javascript:void(0);" class="term_button select"><%= t('term.week') %></a>
+	<% else %>
+	<a href="javascript:void(0);" class="term_button select"><%= t('term.month') %></a>
+	<% end %>
+</div>
+<div id="graph">
+	<canvas id="<%= @graph.name %>"></canvas>
+</div>
+<script>
+var chartdata = {
+  "config": {
+  	"width": <%= $settings['graph_width'] %>,
+  	"height": <%= $settings['graph_height'] %>,
+  	<% if @graphsL[0].usetip == 1 then %>
+    "useMarker": "<%= $settings['useMarker'] %>",
+    "markerWidth": <%= $settings['markerWidth'] %>,
+    <% end %>
+    "type": "<%= @graph_types[@graphsL[0].graph_type] %>",
+    "useVal": "<%= @h_yesno[@graphsL[0].useval] %>",
+    "lineWidth": <%= @graphsL[0].linewidth %>,
+    "unit":"<%= @graphsL[0].y_unit %>",
+    "useShadow":"no",
+    "bgGradient": {
+            "direction":"vertical",
+            "from":"<%= @template.bgfrom %>",
+            "to":"<%= @template.bgto %>"
+         },
+    "textColor": "<%= @template.textcolor %>",
+    "minY":<%= @graphsL[0].y_min %>
+    ,"paddingTop":30
+  },
+
+  "data": [
+    ["<%= @graphx %>"<% @xdata.each{|xx| %>,"<%= xx %>"<% } %>]
+  ]
+};
+var dcolors = Array();
+var datas = Array();
+<% @graphsL.each_with_index{|gl,i| %>
+	dcolors[<%= i %>] = "<%= gl.linecolor %>";
+	datas[<%= i %>] = ["<%= gl.y %>"<% @ydataL[i].each{|yy| %>,<%= yy.to_i %><% } %>];
+<% } %>
+for(var i=0;i<datas.length;i++){
+	chartdata.data[i+1] = datas[i];
+}
+chartdata.config.colorSet = dcolors;
+//ccchart.init('<%= @graph.name %>', chartdata);
+
+<% if @graphsR.size > 0 %>
+var chartdataR = $j.extend(true, {}, chartdata);
+//chartdataR.config.width += 20;
+chartdataR.config.type = "<%= @graph_types[@graphsR[0].graph_type] %>";
+chartdataR.config.minY = <%= @graphsR[0].y_min %> ;
+//chartdataR.config.colorSet = ["#FF0000"];
+chartdataR.config.unit = "<%= @graphsR[0].y_unit %>";
+chartdataR.data = Array();
+chartdataR.data[0] = chartdata.data[0];
+
+
+var dcolorsR = Array();
+var datasR = Array();
+<% @graphsR.each_with_index{|gr,i| %>
+	dcolorsR[<%= i %>] = "<%= gr.linecolor %>";
+	datasR[<%= i %>] = ["<%= gr.y %>"<% @ydataR[i].each{|yy| %>,<%= yy.to_i %><% } %>];
+<% } %>
+for(var i=0;i<datasR.length;i++){
+	chartdataR.data[i+1] = datasR[i];
+}
+chartdataR.config.colorSet = dcolorsR;
+
+//ccchart.add(chartdataR);
+
+$j(document).ready(function(){
+    $j( "#cal1" ).datepicker({dateFormat: 'yy-mm-dd'});
+    $j( "#cal2" ).datepicker({dateFormat: 'yy-mm-dd'});
+    
+    //alert('ok')
+    ccchart.init('<%= @graph.name %>', chartdata);
+    ccchart.add(chartdataR);
+});
+<% end %>
+</script>
+
+</div><!-- main content end -->
+<%= render 'common/footer' %>

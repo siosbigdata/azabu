@@ -1,0 +1,55 @@
+<%= render 'common/header' %>
+<%= render 'common/sidebar' %>
+<!-- main content start -->
+
+<div id="content">
+<div id="sub_content">
+	<h1><i class="<%= @dmenu.icon %>"></i>&nbsp;<%= @dmenu.title %>
+	</h1>
+</div>
+
+
+
+<script>
+var chartdata = {
+  "config": {
+  	"width": 300,
+  	"height": 200,
+    "useShadow":"no",
+    "lineWidth":2,
+    "onlyChart":"yes",
+    "bgGradient": {
+            "direction":"vertical"
+         }
+    ,"paddingTop":0
+  },
+};
+</script>
+<% index = 1 %>
+<% @graphs.each_with_index{|graph,i| %>
+	<div id="dashboard">
+		<h2><i class="<%= @gmenu[i].icon %>"></i><%= graph.title %></h2>
+		<a href="<%= graph_path(graph.id) %>">
+			<canvas id="canvas<%= graph.name %>"></canvas>
+		</a>
+	</div>
+	<script>
+	var canvas<%= graph.id %> = $j.extend(true, {}, chartdata);
+	canvas<%= graph.id %>.config.type = "<%= @graph_types[graph.graph_type] %>";
+	canvas<%= graph.id %>.config.bgGradient = {"direction":"vertical","from":"<%= @templates[i].bgfrom %>","to":"<%= @templates[i].bgto %>"};
+	canvas<%= graph.id %>.config.textColor = "<%= @templates[i].textcolor %>";
+	canvas<%= graph.id %>.config.minY = <%= graph.y_min %>;
+	canvas<%= graph.id %>.config.colorSet = ["<%= graph.linecolor %>"] ;
+	var datas<%= graph.id %> = Array();
+	datas<%= graph.id %>[0] = [""<% @xdatas[i].each{|xx| %>,"<%= xx %>"<% } %>];
+	datas<%= graph.id %>[1] = ["<%= graph.y %>"<% @ydatas[i].each{|yy| %>,<%= yy.to_i %><% } %>];
+	canvas<%= graph.id %>.data = datas<%= graph.id %>;
+	ccchart.init('canvas<%= graph.name %>', canvas<%= graph.id %>);
+	</script>
+	<% if index%$settings['dashboardnum'].to_i == 0  %>
+	<div class="space"></div>
+	<% end %>
+	<% index += 1 %>
+<% } %>
+</div><!-- main content end -->
+<%= render 'common/footer' %>

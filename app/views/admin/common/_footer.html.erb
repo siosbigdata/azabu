@@ -1,0 +1,27 @@
+</div>
+<!-- administrator wrapper end -->
+<!-- administrator footer start -->
+<div id="footer">
+<!-- コピーライト / 著作権表示 -->
+<h1>Copyright©SIOS Technology, Inc. All Rights Reserved</h1>
+</div>
+<!-- script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<script type="text/javascript">
+  var htmlHeight = $j("html").height();
+  var contentHeight = $j("#content").innerHeight();
+  $j(function() {
+    if(htmlHeight > contentHeight){
+      $j("#wrapper").css("height",htmlHeight-150+"px");
+      $j("#content").css("height",htmlHeight-150+"px");
+    }
+  });
+  $j(function() {
+    $j(window).resize(function(){
+      var htmlHeight = $j("html").height();
+      $j("#wrapper").css("height",htmlHeight-150+"px");
+      $j("#content").css("height",htmlHeight-150+"px");
+    });
+  });
+</script>
+
+<!-- administrator footer end -->

@@ -1,0 +1,44 @@
+<%= render 'admin/common/header' %>
+<%= render 'admin/common/sidebar' %>
+<!-- administrator main content start -->
+<div id="content">
+<div id="sub_content">
+	
+	<h1><%= t('title.group.title') %>&nbsp;-&nbsp;<%= @group.title %>&nbsp;-&nbsp;<%= t('admin.menu.menu') %></h1></h1>
+</div>
+
+	<table class="coder">
+	  <thead>
+	    <tr>
+	      <th><%= t('title.menu.name') %></th>
+	      <th><%= t('title.menu.title') %></th>
+	      <th><%= t('title.menu.type') %></th>
+	      <th><%= t('title.menu.parent') %></th>
+	      <th><%= t('title.menu.icon') %></th>
+	      <th><%= t('title.vieworder') %></th>
+	      <th></th>
+	    </tr>
+	  </thead>
+	
+	  <tbody>
+	    <% @admin_menus.each do |admin_menu| %>
+	      <tr>
+	        <td><%= link_to admin_menu.name, edit_admin_menu_path(admin_menu) %></td>
+	        <td><%= admin_menu.title %></td>
+	        <td><%= @select_type[admin_menu.menutype] %></td>
+	        <td><%= @parent_menu[admin_menu.parent_id] %></td>
+	        <td><i class="<%= admin_menu.icon %>"></i></td>
+	        <td><%= admin_menu.vieworder %></td>
+	        <td><%= link_to t('label.delete'), admin_menu, method: :delete, data: { confirm: t('message.delete') } %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+
+<br />
+
+<%= link_to t('label.new'), new_admin_menu_path(:group_id => @group.id ),:class=>"button_link" %>
+
+
+</div><!-- administrator main content end -->
+<%= render 'admin/common/footer' %>

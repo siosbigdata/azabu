@@ -1,0 +1,81 @@
+<%= render 'common/header' %>
+<%= render 'common/sidebar' %>
+<!-- main content start -->
+
+<div id="content">
+<div id="sub_content">
+	<h1><i class="<%= @gmenu.icon %>"></i>&nbsp;<%= @graph.title %>&nbsp;-&nbsp;<%= @h_analysis_types[@graph.analysis_type] %>
+	</h1>
+</div>
+<div id="search">
+	<div class="search_form">
+		<%= form_tag(setday_graph_path) do %>
+		<%= hidden_field_tag(:term,@graph_term) %>
+		<span>
+			<input type="text" id="cal1" name="sday" value="<%= @sdayval %>"></input>
+			&nbsp;-&nbsp;
+			<input type="text" id="cal2" name="eday" value="<%= @edayval %>"></input>	
+		</span>
+
+		<%= submit_tag t('label.search'),:class=>'button' %>
+	<% end %>
+	</div>
+
+</div>
+<div id="term_button" class="data_btn">
+	<a href="<%= graph_path(@graph.id)%>?term=0&sday=<%= @sdayval %>&eday=<%= @edayval %>" class="term_button <% if @graph_term == 0  %>select<% end %>"><%= t('term.hour') %></a>
+	<a href="<%= graph_path(@graph.id)%>?term=1&sday=<%= @sdayval %>&eday=<%= @edayval %>" class="term_button <% if @graph_term == 1  %>select<% end %>"><%= t('term.day') %></a>
+	<a href="<%= graph_path(@graph.id)%>?term=2&sday=<%= @sdayval %>&eday=<%= @edayval %>" class="term_button <% if @graph_term == 2  %>select<% end %>"><%= t('term.week') %></a>
+	<a href="<%= graph_path(@graph.id)%>?term=3&sday=<%= @sdayval %>&eday=<%= @edayval %>" class="term_button <% if @graph_term == 3  %>select<% end %>"><%= t('term.month') %></a>
+	<% if @csvflg  %>
+	<a href="<%= graph_path(@graph.id)%>/csvexport?sday=<%= @sdayval %>&eday=<%= @edayval %>" class="csv_btn"><i class="icon-download-alt"></i>&nbsp;csv</a>
+	<% else %>
+	<a href="javascript:void(0);" class="csv_btn disable"><i class="icon-download-alt"></i>&nbsp;csv</a>
+	<% end %>
+</div>
+<div id="graph">
+	<canvas id="<%= @graph.name %>"></canvas>
+</div>
+<script>
+var chartdata = {
+  "config": {
+  	"width": <%= $settings['graph_width'] %>,
+  	"height": <%= $settings['graph_height'] %>,
+  	<% if @graph.usetip == 1  %>
+    "useMarker": "<%= $settings['useMarker'] %>",
+    "markerWidth": <%= $settings['markerWidth'] %>,
+    <% end %>
+    "type": "<%= @graph_types[@graph.graph_type] %>",
+    "useVal": "<%= @h_yesno[@graph.useval] %>",
+    "useShadow":"no",
+    "lineWidth": <%= @graph.linewidth %>,
+    "unit":"<%= @graph.y_unit %>",
+    "colorSet": 
+    	["<%= @graph.linecolor %>"],
+    "bgGradient": {
+            "direction":"vertical",
+            "from":"<%= @template.bgfrom %>",
+            "to":"<%= @template.bgto %>"
+         },
+    "textColor": "<%= @template.textcolor %>",
+    "minY":<%= @graph.y_min %>
+    ,"paddingTop":30
+  },
+
+  "data": [
+    ["<%= @graphx %>"<% @xdata.each{|xx| %>,"<%= xx %>"<% } %>]
+    ,["<%= @graph.y %>"<% @ydata.each{|yy| %>,<%= yy.to_i %><% } %>]
+  ]
+};
+//ccchart.init('<%= @graph.name %>', chartdata);
+
+$j(document).ready(function(){
+    $j( "#cal1" ).datepicker({dateFormat: 'yy-mm-dd'});
+    $j( "#cal2" ).datepicker({dateFormat: 'yy-mm-dd'});
+    
+    ccchart.init('<%= @graph.name %>', chartdata);
+});
+</script>
+
+</div><!-- main content end -->
+<%= render 'common/footer' %>

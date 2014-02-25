@@ -1,0 +1,216 @@
+ja:
+  apptitle: OSSダッシュボード
+  login:
+    title: ログイン
+    mail: メールアドレス
+    password: パスワード
+    notice: ログインしてください。
+    forgotten:
+      password:
+        user: パスワードを忘れた方
+        message: パスワードを再設定する。
+    admin:
+      title: 管理者ログイン
+    error:
+      message: メールアドレスまたはパスワードが正しくありません。
+  logout:
+    title: ログアウト
+    message: ログアウトしますか？
+
+  label:
+    list: 一覧
+    new: 新規作成
+    edit: 編集
+    update: 更新
+    delete: 削除
+    show: 詳細
+    select: 選択
+    search: 検索
+    send: 送信
+    back: 戻る
+
+  title:
+    valyes: はい
+    valno: いいえ
+
+    dashboard:
+      title: ダッシュボード
+
+    title: 表示名
+    vieworder: 表示順
+
+    groupgraphs:
+      list: グラフを選択する
+    groupdashboards:
+      list: ダッシュボード用グラフを選択する
+    user:
+      title: ユーザー
+      name: ユーザー名
+      mail: メールアドレス
+      admin: 管理者権限
+    group:
+      title: グループ
+      name: グループ名
+    graph:
+      title: グラフ
+      name: グラフ名
+      analysis_type: 分析タイプ
+      graph_type: グラフタイプ
+      term: 期間
+      y: Y軸表示名
+      y_min: Y軸最小値
+      y_max_time: Y軸最大値-時
+      y_max_day: Y軸最大値-日
+      y_max_month: Y軸最大値-月
+      useval: 値表示
+      useshadow: 影表示
+      usetip: ツールチップ表示
+      usepredata: 直前データ表示
+      uselastyeardata: 前年データ表示
+      linewidth: 線の太さ
+      template: テンプレート
+      unit: Y軸表示文字
+
+    merge:
+      title: マージ
+      name: マージ名
+      graph: マージグラフ
+      linecolor: マージグラフ線色
+      side: 表示サイド
+
+    menu:
+      title: メニュー
+      name: 名前
+      group: グループ
+      parent_id: 親メニューID
+      parent: 親メニュー
+      icon: アイコン
+      type: メニュータイプ
+
+    setting:
+      title: 設定
+      name: 設定名
+      parameter: 値
+
+  message:
+    delete: 削除してもよいですか？
+    select_blank: 選択してください。
+    over_csv: 今月のCSVダウンロード最大容量を超過しました。
+    graph_name: 「td_」をのぞいた存在するテーブル名を指定してください。
+    graph_new: 新規作成前にあらかじめデータベースに「td_XXXX」という名前のテーブルを作成する必要があります。
+    setting:
+      success: 更新しました。
+    error:
+      errpr: エラー
+      user:
+        message: ユーザー情報の保存に失敗しました。
+      group:
+        message: グループ情報の保存に失敗しました。
+      graph:
+        message: グラフ情報の保存に失敗しました。
+      mail:
+        message: が正しくありません。
+      setting:
+        message: 設定値の保存に失敗しました。
+      graph:
+        name:
+          format:
+            message: に半角英数字を入力してください。
+        table:
+          exists:
+            message: に指定されたテーブルはデータベース内に存在しません。
+
+  attributes:
+    name: 名前
+    password: パスワード
+    password_confirmation: 確認用パスワード
+    title: 表示名
+    mail: メールアドレス
+    admin: 管理者権限
+    group: グループ
+    group_id: グループ
+    graph: グラフ
+    analysis_type: 分析タイプ
+    graph_type: グラフタイプ
+    term: 期間
+    y: Y軸表示名
+    y_min: Y軸最小値
+    y_max_time: Y軸最大値-時
+    y_max_day: Y軸最大値-日
+    y_max_month: Y軸最大値-月
+    y_unit: Y軸表示文字
+    parameter: 値
+    useval: 値表示
+    useshadow: 影表示
+    usetip: ツールチップ表示
+    usepredata: 直前データ表示
+    uselastyeardata: 前年データ表示
+    linewidth: 線の太さ
+    template_id: テンプレート
+    template: テンプレート
+    merge_graph: マージグラフ
+    merge_linecolor: マージグラフ線色
+    parent_id: 親メニュー
+    vieworder: 表示順
+    icon: アイコン
+    menutype: メニュータイプ
+    side: 表示サイド
+
+  #選択肢
+  select:
+    analysis_types:
+      sum: 集計
+      avg: 平均
+    graph_types:
+      line: 折線
+      bar: 縦棒
+      pie: 円
+
+  #期間
+  term:
+    week: 週
+    hour: 時間
+    day: 日
+    week: 週
+    month: 月
+    year: 年
+
+  # 過去のグラフ
+  pastgraph:
+    pre: 前
+    last: 昨年
+  #ボタン
+  button:
+    back: ＜＜
+    prev: ＞＞
+  # 管理画面用
+  admin:
+    admin: 管理者
+    view: 管理画面
+
+    menu:
+      home: ホーム
+      user: ユーザー管理
+      group: グループ管理
+      graph: グラフ管理
+      setting: 設定
+      menu: メニュー
+      merge: 複数グラフ
+      mergegraph: マージグラフ
+      
+#      level:
+#        root: ルート
+#        level1: レベル１
+#        level2: レベル２
+      type:
+        label: ラベル
+        dashboard: ダッシュボード
+        graph: グラフ
+        merge: マージグラフ
+      parent:
+        none: なし
+    
+    mergegraph:
+      side:
+        left: 左
+        right: 右

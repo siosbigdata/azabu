@@ -1,0 +1,40 @@
+<%= render 'admin/common/header' %>
+<%= render 'admin/common/sidebar' %>
+<!-- administrator main content start -->
+<div id="content">
+<div id="sub_content">
+	
+	<h1><%= t('admin.menu.merge') %></h1>
+</div>
+
+	<table class="coder">
+	  <thead>
+	    <tr>
+	      <th><%= t('title.merge.name') %></th>
+	      <th><%= t('title.title') %></th>
+	      <th><%= t('title.graph.term') %></th>
+	      <th></th>
+	      <th></th>
+	    </tr>
+	  </thead>
+
+  <tbody>
+    <% @admin_merges.each do |admin_merge| %>
+      <tr>
+        <td><%= link_to admin_merge.name, edit_admin_merge_path(admin_merge) %></td>
+        <td><%= admin_merge.title %></td>
+        <td><%= @h_terms[admin_merge.term] %></td>
+        <td><%= link_to t('title.merge.graph'), list_admin_mergegraph_path(admin_merge) %></td>
+        <td><%= link_to t('label.delete'), admin_merge, method: :delete, data: { confirm: t('message.delete') } %></td>
+      </tr>
+    <% end %>
+	  </tbody>
+	</table>
+
+<br />
+
+<%= link_to t('label.new'), new_admin_merge_path,:class=>"button_link" %>
+
+
+</div><!-- administrator main content end -->
+<%= render 'admin/common/footer' %>

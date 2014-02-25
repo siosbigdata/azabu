@@ -1,0 +1,37 @@
+<%= render 'admin/common/header' %>
+<%= render 'admin/common/sidebar' %>
+<!-- administrator main content start -->
+<div id="content">
+<div id="sub_content">
+
+	<h1><%= t('admin.menu.setting') %>
+</div>
+
+	<table class="coder">
+	  <thead>
+	    <tr>
+	      <th><%= t('title.setting.name') %></th>
+	      <th><%= t('title.setting.parameter') %></th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    <% @admin_settings.each do |admin_setting| %>
+	      <tr>
+	        <td><%= link_to admin_setting.title, edit_admin_setting_path(admin_setting) %></td>
+	        <% if admin_setting.name == "week_startday" %>
+	        	<td><%= @week[admin_setting.parameter.to_i] %></td>
+	        <% elsif admin_setting.name == "base_term" %>
+	        	<td><%= @h_terms[admin_setting.parameter.to_i] %></td>
+	        <% else %>
+	        	<td><%= admin_setting.parameter %></td>
+	        <% end %>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+
+<br />
+
+</div><!-- administrator main content end -->
+<%= render 'admin/common/footer' %>

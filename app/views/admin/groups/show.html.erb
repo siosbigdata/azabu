@@ -1,0 +1,26 @@
+<%= render 'admin/common/header' %>
+<%= render 'admin/common/sidebar' %>
+<!-- administrator main content start -->
+<div id="content">
+<div id="sub_content">
+	<h1><%= t('admin.menu.group') %>&nbsp;-&nbsp;<%= t('label.show') %></h1>
+</div>
+
+
+<p>
+  <strong><%= t('title.group.name')%></strong>
+  <%= @admin_group.name %>
+</p>
+
+<p>
+  <strong><%= t('title.group.title')%></strong>
+  <%= @admin_group.title %>
+</p>
+<br /><br />
+<%= link_to t('label.back'), admin_groups_path,:class=>"button_link" %>
+<%= link_to t('label.edit'), edit_admin_group_path(@admin_group),:class=>"button_link" %> 
+
+
+
+</div><!-- administrator main content end -->
+<%= render 'admin/common/footer' %>

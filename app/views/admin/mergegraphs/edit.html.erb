@@ -1,0 +1,15 @@
+<%= render 'admin/common/header' %>
+<%= render 'admin/common/sidebar' %>
+<!-- administrator main content start -->
+<div id="content">
+<div id="sub_content">
+	<h1><%= t('admin.menu.mergegraph') %>&nbsp;-&nbsp;<%= t('title.edit') %></h1>
+</div>
+
+<%= render 'form' %>
+
+<%= link_to t('label.back'), list_admin_mergegraph_path(@merge.id),:class=>"button_link" %>
+
+
+</div><!-- administrator main content end -->
+<%= render 'admin/common/footer' %>

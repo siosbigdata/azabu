@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  merge_id: 1
+  graph_id: 1
+  side: 1
+  'y': MyString
+  vieworder: 1
+
+two:
+  merge_id: 1
+  graph_id: 1
+  side: 1
+  'y': MyString
+  vieworder: 1

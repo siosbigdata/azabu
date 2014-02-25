@@ -1,0 +1,41 @@
+<%= render 'admin/common/header' %>
+<%= render 'admin/common/sidebar' %>
+<!-- administrator main content start -->
+<div id="content">
+<div id="sub_content">
+	<h1><%= t('admin.menu.group') %></h1>
+</div>
+
+<table class="coder">
+  <thead>
+    <tr>
+      <th><%= t('title.group.name')%></th>
+      <th><%= t('title.title')%></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_groups.each do |admin_group| %>
+      <tr>
+        <td><%= link_to admin_group.name, edit_admin_group_path(admin_group) %></td>
+        <td><%= admin_group.title %></td>
+        <td><%= link_to t('admin.menu.menu'), list_admin_menu_path(admin_group) %></td>
+        <% if @delete_hash[admin_group.id] %>
+        <td>&nbsp;</td>
+        <% else %>
+        <td><%= link_to t('label.delete'), admin_group, method: :delete, data: { confirm: t('message.delete') } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if @admin_groups.length < @maxuser %>
+<%= link_to t('label.new'), new_admin_group_path,:class=>"button_link" %>
+<% end %>
+
+</div><!-- administrator main content end -->
+<%= render 'admin/common/footer' %>

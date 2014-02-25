@@ -1,0 +1,1 @@
+json.extract! @admin_graph, :name, :title, :analysis_type,:graph_type, :term, :y,:y_min,:template,:useval,:usetip,:linewidth, :created_at, :updated_at,:y_unit

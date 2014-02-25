@@ -1,0 +1,24 @@
+<%= render 'admin/common/header' %>
+<%= render 'admin/common/sidebar' %>
+<!-- administrator main content start -->
+<div id="content">
+<div id="sub_content">
+
+	<h1><%= t('admin.menu.setting') %>&nbsp;-&nbsp;<%= t('label.show') %></h1>
+</div>
+
+<p>
+  <strong><%= t('title.setting.name') %></strong>
+  <%= @admin_setting.title %>
+</p>
+
+<p>
+  <strong><%= t('title.setting.parameter') %></strong>
+  <%= @admin_setting.parameter %>
+</p>
+<br /><br />
+<%= link_to t('label.back'), admin_settings_path,:class=>"button_link" %>
+<%= link_to t('label.edit'), edit_admin_setting_path(@admin_setting),:class=>"button_link" %>
+
+</div><!-- administrator main content end -->
+<%= render 'admin/common/footer' %>

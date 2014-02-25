@@ -1,0 +1,70 @@
+<%= render 'admin/common/header' %>
+<%= render 'admin/common/sidebar' %>
+<!-- administrator main content start -->
+<div id="content">
+<div id="sub_content">
+	<h1><%= t('admin.menu.graph') %>&nbsp;-&nbsp;<%= t('label.show') %></h1>
+</div>
+<div id="setting">
+<p>
+  <strong><%= t('title.graph.name') %></strong>
+  <%= @admin_graph.name %>
+</p>
+
+<p>
+  <strong><%= t('title.graph.title') %></strong>
+  <%= @admin_graph.title %>
+</p>
+
+<p>
+  <strong><%= t('title.graph.analysis_type') %></strong>
+  <%= @h_analysis_types[@admin_graph.analysis_type] %>
+</p>
+
+<p>
+  <strong><%= t('title.graph.graph_type') %></strong>
+  <%= @h_graph_types[@admin_graph.graph_type] %>
+</p>
+
+<p>
+  <strong><%= t('title.graph.term') %></strong>
+  <%= @h_terms[@admin_graph.term] %>
+</p>
+
+<p>
+  <strong><%= t('title.graph.y') %></strong>
+  <%= @admin_graph.y %>
+</p>
+<p>
+  <strong><%= t('title.graph.y_min') %></strong>
+  <%= @admin_graph.y_min %>
+</p>
+
+<p>
+  <strong><%= t('title.graph.unit') %></strong>
+  <%= @admin_graph.y_unit %>
+</p>
+<p>
+  <strong><%= t('title.graph.useval') %></strong>
+  <%= @h_yesno[@admin_graph.useval] %>
+</p>
+<p>
+  <strong><%= t('title.graph.usetip') %></strong>
+  <%= @h_yesno[@admin_graph.usetip] %>
+</p>
+<p>
+  <strong><%= t('title.graph.linewidth') %></strong>
+  <%= @admin_graph.linewidth %>
+</p>
+
+<p>
+  <strong><%= t('title.graph.template') %></strong>
+  <%= @h_template[@admin_graph.template] %>
+</p>
+<br /><br />
+<%= link_to t('label.back'), admin_graphs_path,:class=>"button_link" %>
+<%= link_to t('label.edit'), edit_admin_graph_path(@admin_graph),:class=>"button_link" %> 
+
+</div>
+</div><!-- administrator main content end -->
+<%= render 'admin/common/footer' %>

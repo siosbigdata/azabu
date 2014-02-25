@@ -1,0 +1,41 @@
+<%= render 'admin/common/header' %>
+<%= render 'admin/common/sidebar' %>
+<!-- administrator main content start -->
+<div id="content">
+<div id="sub_content">
+	
+	<h1><%= t('admin.menu.user') %>&nbsp;-&nbsp;<%= t('label.show') %></h1>
+</div>
+
+<p>
+  <strong><Name:><%= t('title.user.name') %></strong>
+  <%= @admin_user.name %>
+</p>
+
+<p>
+  <strong><%= t('title.title') %></strong>
+  <%= @admin_user.title %>
+</p>
+
+<p>
+  <strong><%= t('title.user.mail') %></strong>
+  <%= @admin_user.mail %>
+</p>
+
+<p>
+  <strong><%= t('title.group.name') %></strong>
+  <%= @admin_user.group.title %>
+</p>
+
+<p>
+  <strong><%= t('title.user.admin') %></strong>
+  <%= @admin_user.admin %>
+</p>
+<br /><br />
+<%= link_to t('label.back'), admin_users_path,:class=>"button_link" %>
+<%= link_to t('label.edit'), edit_admin_user_path(@admin_user),:class=>"button_link" %>
+
+
+
+</div><!-- administrator main content end -->
+<%= render 'admin/common/footer' %>

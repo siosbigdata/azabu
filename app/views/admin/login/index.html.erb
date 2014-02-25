@@ -1,0 +1,25 @@
+<%= render 'admin/common/header' %>
+<div id="login">
+<%= form_tag :controller => 'login', :action => 'create' do -%>
+<h2 id="login_title"><%= t('login.title') %></h2>
+<table>
+<tbody>
+	<tr>
+		<th><%= label_tag :mail, t('login.mail') %></th>
+		<td><%= text_field_tag :mail, params[:mail] %></td>
+	</tr>
+	<tr>
+		<th><%= label_tag :pass, t('login.password') %></th>
+		<td><%= password_field_tag :pass , params[:pass]%></td>
+	</tr>
+	<% if @errormsg %>
+		<tr><td colspan="2">
+		<div id="error_msg"><%= t('login.error.message') %><br /></div>
+		</td></tr>
+	<% end %>
+	<tr><td colspan="2"><div id="login_action"><%= submit_tag t('login.title'),:class=>"button_admin" %></div></td></tr>
+</tbody>
+</table>
+<% end %>
+</div>
+<%= render 'admin/common/footer' %>
