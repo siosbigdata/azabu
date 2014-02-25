@@ -10,7 +10,8 @@ shirokaneに複数グラフのマージ機能を追加したものです。
 =========
 * テーブルの作成
   もし、「test01」というグラフを表示したい場合は下記のテーブルをデータベースに作成します。(ex. postgresql)
-  
+
+```
 >create table td_test01 (td_time timestamp with time zone,td_count decimal);
 >create table td_hour_test01 (td_time timestamp with time zone,td_count decimal,analysis_type integer);
 >create table td_day_test01 (td_time timestamp with time zone,td_count decimal,analysis_type integer);
@@ -19,7 +20,7 @@ shirokaneに複数グラフのマージ機能を追加したものです。
   
   $ rails c
 >Graph.create(:name=>"test01",:title=>"テスト０１",:analysis_type=>0,:graph_type=>0,:term=>1,:y=>"count",:y_min=>0,:useval=>0,:usetip => 0,:linewidth=>2,:linecolor=>"#FF0000",:template=>"white-dimgray")
-    
+```
 注意
 =========
 * Ruby on Rails4で動作しています。
