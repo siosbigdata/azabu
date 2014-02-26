@@ -24,7 +24,7 @@ class Admin::GraphsController < AdminController
     @newflg = true  # フラグ
 
     # 初期値を入力
-    @admin_graph.term = 2   # 日
+    @admin_graph.term = Graph::DAY   # 2
     @admin_graph.linewidth = 2  # 線の太さ
     @admin_graph.y_min = 0 # Y軸最小値
 #    @admin_graph.y_max_time = 100   # Y軸最大値-時
@@ -75,7 +75,7 @@ class Admin::GraphsController < AdminController
     def set_select_items
       @h_analysis_types = {0 => t('select.analysis_types.sum'),1 => t('select.analysis_types.avg')}
       @h_graph_types = {0 => t('select.graph_types.line'),1 => t('select.graph_types.bar')}
-      @h_terms ={0=> t('datetime.prompts.hour'),1 => t('datetime.prompts.day'),2 => t('term.week'),3 => t('datetime.prompts.month')}
+      @h_terms ={Graph::HOUR=> t('datetime.prompts.hour'),Graph::DAY => t('datetime.prompts.day'),Graph::WEEK => t('term.week'),Graph::MONTH => t('datetime.prompts.month')}
       @h_yesno={0=> t('title.valno'),1 => t('title.valyes')}
       @h_template = Hash.new()
       tmp = Admin::Graphtemplate.all.order(:name)

@@ -75,7 +75,7 @@ class Admin::MergesController < AdminController
     end
     
     def set_select
-      @h_terms ={0=> t('datetime.prompts.hour'),1 => t('datetime.prompts.day'),2 => t('term.week'),3 => t('datetime.prompts.month')}
+      @h_terms ={Graph::HOUR=> t('datetime.prompts.hour'),Graph::DAY => t('datetime.prompts.day'),Graph::WEEK => t('term.week'),Graph::MONTH => t('datetime.prompts.month')}
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

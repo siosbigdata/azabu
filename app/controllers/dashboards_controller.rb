@@ -20,11 +20,11 @@ class DashboardsController < PublichtmlController
     @graph_types = ['line','bar']
     # 表示期間の設定
     # 開始日付
-    @sday = getStartDay
+    @sday = Graph::getStartDay
     @sdayval = @sday.strftime("%Y-%m-%d")
     
     # 終了日付
-    @eday = getEndDay
+    @eday = Graph::getEndDay
     @edayval = @eday.strftime("%Y-%m-%d")
       
     @gmenu = []
@@ -39,16 +39,15 @@ class DashboardsController < PublichtmlController
       # 指定グラフ情報
       graph = Graph.find_by_name(mg.name)
       @graphs.push(graph)
-      p "★★DashboardsController:show2★★★★★★★★★★★★★★★★★★★" + mg.name
       # 指定テンプレート情報
       tmpl = Graphtemplate.find_by_name(graph.template)
       @templates.push(tmpl)
       # 集計テーブル更新
-      update_table(graph,graph.term)
+      Graph::update_table(graph,graph.term)
       # データの取得
-      tdtable = get_table_data(graph,graph.term,@sday,@eday)
+      tdtable = Graph::get_table_data(graph,graph.term,@sday,@eday)
       # グラフ表示用データ作成
-      res_graph_data = set_graph_data(tdtable,graph.term)
+      res_graph_data = Graph::set_graph_data(tdtable,graph.term)
       @xdatas.push(res_graph_data['xdata'])
       @ydatas.push(res_graph_data['ydata'])
     }

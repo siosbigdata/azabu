@@ -68,7 +68,7 @@ class MergesController < PublichtmlController
   # 集計テーブル更新
   mergegraphs.each_with_index{|mg,i|
     graph = Graph.find(mg.graph_id)
-    update_table(graph,@merge_term)
+    Graph::update_table(graph,@merge_term)
     
     if mg.side === 0
       @graphsL.push(graph)
@@ -88,7 +88,7 @@ class MergesController < PublichtmlController
   elsif params[:sday] then
     @sday = Date.parse(params[:sday].to_s)
   else
-    @sday = getStartDay
+    @sday = Graph::getStartDay
   end
   @sdayval = @sday.strftime("%Y-%m-%d")
   
@@ -98,7 +98,7 @@ class MergesController < PublichtmlController
   elsif params[:eday] then
     @eday = Date.parse(params[:eday].to_s)
   else
-    @eday = getEndDay
+    @eday = Graph::getEndDay
   end
   @edayval = @eday.strftime("%Y-%m-%d")
   
@@ -109,18 +109,18 @@ class MergesController < PublichtmlController
   # 左側グラフ
   @graphsL.each{|gl|
     # データの取得
-    tdtable = get_table_data(gl,@merge_term,@sday,@eday)
+    tdtable = Graph::get_table_data(gl,@merge_term,@sday,@eday)
     # グラフ表示用データ作成
-    res_graph_data = set_graph_data(tdtable,@merge_term)
+    res_graph_data = Graph::set_graph_data(tdtable,@merge_term)
     
     xdata.push(res_graph_data['xdata'])
     @ydataL.push(res_graph_data['ydata'])
   }
   @graphsR.each{|gl|
     # データの取得
-    tdtable = get_table_data(gl,@merge_term,@sday,@eday)
+    tdtable = Graph::get_table_data(gl,@merge_term,@sday,@eday)
     # グラフ表示用データ作成
-    res_graph_data = set_graph_data(tdtable,@merge_term)
+    res_graph_data = Graph::set_graph_data(tdtable,@merge_term)
     
     xdata.push(res_graph_data['xdata'])
     @ydataR.push(res_graph_data['ydata'])
@@ -128,11 +128,11 @@ class MergesController < PublichtmlController
 
   @xdata = xdata[0]
   case @merge_term
-    when 0 # hour
+    when Graph::HOUR
     @graphx = t("datetime.prompts.hour")
-    when 1 # day
+    when Graph::DAY
     @graphx = t("datetime.prompts.day")
-    when 2 # week
+    when Graph::WEEK
     @graphx = t("datetime.prompts.day")
     else #month
     @graphx = t("datetime.prompts.month")

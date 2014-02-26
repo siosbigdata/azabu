@@ -39,3 +39,5 @@ gem 'jquery-ui-rails'
 
 gem 'jquery-rails'
 
+# https://github.com/binarylogic/settingslogic
+gem 'settingslogic'

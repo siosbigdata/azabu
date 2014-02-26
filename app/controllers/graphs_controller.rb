@@ -12,7 +12,7 @@ class GraphsController < PublichtmlController
   # グラフ用画面
   def index
     # グラフIDの指定が無い場合はルートへ移動
-    redirect_to root_path
+    redirect_to root_url
   end
   
   def setday
@@ -107,7 +107,7 @@ class GraphsController < PublichtmlController
     end
     
     # 集計テーブル更新
-    update_table(@graph,@graph_term)
+    Graph::update_table(@graph,@graph_term)
 
     # 表示期間の設定
     @sdayval = ""  # 開始日付
@@ -118,7 +118,7 @@ class GraphsController < PublichtmlController
     elsif params[:sday] then
       @sday = Date.parse(params[:sday].to_s)
     else
-      @sday = getStartDay
+      @sday = Graph::getStartDay
     end
     @sdayval = @sday.strftime("%Y-%m-%d")
     
@@ -128,27 +128,26 @@ class GraphsController < PublichtmlController
     elsif params[:eday] then
       @eday = Date.parse(params[:eday].to_s)
     else
-      @eday = getEndDay
+      @eday = Graph::getEndDay
     end
     @edayval = @eday.strftime("%Y-%m-%d")
 
     # データの取得
-    tdtable = get_table_data(@graph,@graph_term,@sday,@eday)
+    tdtable = Graph::get_table_data(@graph,@graph_term,@sday,@eday)
     # グラフ表示用データ作成
-    res_graph_data = set_graph_data(tdtable,@graph_term)
+    res_graph_data = Graph::set_graph_data(tdtable,@graph_term)
     @xdata = res_graph_data['xdata']
     @ydata = res_graph_data['ydata']
     case @graph_term
-      when 0 # hour
+      when Graph::HOUR
       @graphx = t("datetime.prompts.hour")
-      when 1 # day
+      when Graph::DAY
       @graphx = t("datetime.prompts.day")
-      when 2 # week
+      when Graph::WEEK
       @graphx = t("datetime.prompts.day")
       else #month
       @graphx = t("datetime.prompts.month")
     end
-#    @graphx = res_graph_data['graphx']
 p @xdata
 p @ydata
   end
