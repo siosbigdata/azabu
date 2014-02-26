@@ -9,5 +9,5 @@ class Admin::Mergegraph < Mergegraph
   validates :graph_id,  :presence => true,:numericality=>true
   validates :side,  :presence => true,:numericality=>true
   validates :y,  :presence => true
-    validates :vieworder,  :presence => true,:numericality=>true
+  validates :vieworder,  :presence => true,:numericality=>true
 end

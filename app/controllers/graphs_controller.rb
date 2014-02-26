@@ -24,9 +24,6 @@ class GraphsController < PublichtmlController
       sday = ""
       eday = ""
     end
-    p "★★setday★★★★★★★★★★★★★★★★★★★"
-    p sday
-    p eday
     term = params[:term]
     redirect_to :action => "show",:flash=>{:sday=>sday,:eday=>eday,:term=>term}
   end
@@ -83,7 +80,6 @@ class GraphsController < PublichtmlController
       
     # 値設定
     @h_analysis_types = {0 => t('select.analysis_types.sum'),1 => t('select.analysis_types.avg')}
-#@h_terms ={0=> t('datetime.prompts.day'),1 => t('week'),2 => t('datetime.prompts.month'),3 => t('datetime.prompts.year')}
     @h_yesno = {0=>'no' , 1 => 'yes'}
     
     # CSVダウンロードボタン用フラグ
@@ -161,7 +157,6 @@ p @ydata
   private
   # グラフが利用可能かをチェックする
   def check_graph_permission(id)
-    #return Groupgraph.exists?({:group_id=>current_user.group.id,:graph_id=>p_graph_id}) 
     gf = Graph.find(id)
     return Menu.exists?({:group_id=>current_user.group.id,:name=>gf.name,:menutype=>2}) 
   end

@@ -8,10 +8,6 @@ class Admin::MenusController < AdminController
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
   before_action :set_select, only: [:show, :edit, :list, :new,:create,:update]
 
-#  # 一覧表示
-#  def index
-#    @admin_menus = Admin::Menu.all.order(:group_id,:vieworder,:level)
-#  end
   # 一覧表示
   def list
     group_id = params[:id].to_i

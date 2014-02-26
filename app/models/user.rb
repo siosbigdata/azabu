@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
     
     # 入力チェック
     validates :title,  :presence => true
-    validates :mail,  :presence => true,:uniqueness=>true, :email_format => {:message => I18n.t('error_mail_message')}
+    validates :mail,  :presence => true,:uniqueness=>true, :email_format => {:message => I18n.t('message.error.mail.message')}
 
   before_create { generate_token(:auth_token) }
   

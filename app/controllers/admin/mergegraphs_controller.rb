@@ -7,19 +7,13 @@ class Admin::MergegraphsController < AdminController
   before_filter :admin_authorize, :except => :login #ログインしていない場合はログイン画面に移動
   before_action :set_mergegraph, only: [:show, :edit, :update]
   before_action :set_select, only: [:show, :edit, :update, :new,:create,:list]
-
-#  # GET /mergegraphs
-#  # GET /mergegraphs.json
-#  def index
-#    @mergegraphs = Mergegraph.all
-#  end
   
   # 一覧表示
     def list
       merge_id = params[:id].to_i
       if Admin::Merge.exists?(merge_id)
         @merge = Admin::Merge.find(merge_id)
-        @mergegraphs = Admin::Mergegraph.where(:merge_id => merge_id).order(:vieworder)
+        @mergegraphs = Admin::Mergegraph.where(:merge_id => merge_id).order(:side,:vieworder)
       else
         redirect_to admin_merges_url
       end
@@ -33,16 +27,12 @@ class Admin::MergegraphsController < AdminController
   # GET /mergegraphs/new
   def new
     merge_id = params[:merge_id].to_i
-#      p merge_id
-#      p Admin::Merge.exists?(merge_id)
         if Admin::Merge.exists?(merge_id)
           @merge = Admin::Merge.find(merge_id)
           @mergegraph = Admin::Mergegraph.new
         else
           redirect_to admin_merges_url
         end
-        
-#        p @merge.id
   end
 
   # GET /mergegraphs/1/edit

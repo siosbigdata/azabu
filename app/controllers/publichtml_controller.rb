@@ -25,8 +25,6 @@ class PublichtmlController < ApplicationController
   #graphメニュー作成
   def current_menu
     if current_user
-      #@current_graph_menu = Graph.joins(:groupgraph).where(:groupgraphs=>{:group_id=>current_user.group.id}).order(:id)
-      #@current_graph_menu = Graph.joins(:groupgraph).where(:groupgraphs=>{:group_id=>current_user.group.id}).order("groupgraphs.view_rank")
       mroot = Menu.where(:group_id=>current_user.group.id,:parent_id => 0).order(:vieworder)
       @current_menu = Array::new
       mroot.each{|rr|

@@ -6,7 +6,6 @@
 class Admin::Menu < Menu
   #入力チェック
   validates :group_id,  :presence => true,:numericality=>true
-#  validates :level,  :presence => true,:numericality=>true
   validates :parent_id,  :presence => true,:numericality=>true
   validates :name,  :presence => true,:uniqueness=>true
   validates :title,  :presence => true

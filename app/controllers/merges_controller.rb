@@ -21,9 +21,6 @@ class MergesController < PublichtmlController
       sday = ""
       eday = ""
     end
-    p "★★setday★★★★★★★★★★★★★★★★★★★"
-    p sday
-    p eday
     term = params[:term]
     redirect_to :action => "show",:flash=>{:sday=>sday,:eday=>eday,:term=>term}
   end
@@ -39,7 +36,6 @@ class MergesController < PublichtmlController
     
   # 値設定
   @h_analysis_types = {0 => t('select.analysis_types.sum'),1 => t('select.analysis_types.avg')}
-#@h_terms ={0=> t('datetime.prompts.day'),1 => t('week'),2 => t('datetime.prompts.month'),3 => t('datetime.prompts.year')}
   @h_yesno = {0=>'no' , 1 => 'yes'}
   
   # グラフ選択枝
@@ -131,31 +127,20 @@ class MergesController < PublichtmlController
   }
 
   @xdata = xdata[0]
-  # データの取得
-#  tdtable = get_table_data(@graph,@merge_term,@sday,@eday)
-  # グラフ表示用データ作成
-#  res_graph_data = set_graph_data(tdtable,@merge_term)
-#  @xdata = res_graph_data['xdata']
-#  @ydata = res_graph_data['ydata']
-#  @graphx = res_graph_data['graphx']
-#p @xdata
-#p @ydata
-    case @merge_term
-      when 0 # hour
-      @graphx = t("datetime.prompts.hour")
-      when 1 # day
-      @graphx = t("datetime.prompts.day")
-      when 2 # week
-      @graphx = t("datetime.prompts.day")
-      else #month
-      @graphx = t("datetime.prompts.month")
-    end
+  case @merge_term
+    when 0 # hour
+    @graphx = t("datetime.prompts.hour")
+    when 1 # day
+    @graphx = t("datetime.prompts.day")
+    when 2 # week
+    @graphx = t("datetime.prompts.day")
+    else #month
+    @graphx = t("datetime.prompts.month")
+  end
 end
 
-
-
   private
-# マージが利用可能かをチェックする
+  # マージが利用可能かをチェックする
   def check_merge_permission(id)
     mf = Merge.find(id)
     return Menu.exists?({:group_id=>current_user.group.id,:name=>mf.name,:menutype=>3}) 

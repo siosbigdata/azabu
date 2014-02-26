@@ -3,7 +3,7 @@
 # Author:: Kazuko Ohmura
 # Date:: 2013.07.25
 
-Shirokane::Application.routes.draw do
+Azabu::Application.routes.draw do
   root 'dashboards#index'
   resources :dashboards
   #get "password_resets/new"

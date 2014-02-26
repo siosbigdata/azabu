@@ -10,8 +10,8 @@
 
 # Ignore all logfiles and tempfiles.
 
-.keep
 /.project
+*keep
 *DS_Store
 /config.ru
 /3.0.0
@@ -36,9 +36,5 @@
 /tmp/
 /vendor/
 /config/database.yml
-/config/locales/*.yml
-/config/locales/admin/*.yml
-/config/locales/defaults/*.yml
-/config/locales/graphs/*.yml
 /config/environments/*.rb
 

@@ -22,93 +22,9 @@ class ApplicationController < ActionController::Base
       $settings = Hash.new()
       ss.map{|s|
         $settings[s.name.to_s] = s.parameter.to_s
-#        p s.name.to_s 
-#        p s.parameter.to_s
       }
     end
   end
-=begin
-# ----------------------------------------------------------- #
-  # グラフ用データの取得
-  def td_graph_data(graph,term,startday,endday)
-    # テーブル名の設定
-    Tdtable.table_name = get_td_tablename(graph.name)
-    #SQLの作成
-    if term == 1 || term == 2 # 週、月:日別データを表示する
-      if graph.analysis_type == 1 #集計タイプ : graph.analysis_type 0:集計、1:平均
-        #平均
-        tdtable = Tdtable.where(:td_time => startday .. endday).group("date_trunc('day',td_time)").select("date_trunc('day',td_time) as td_time,avg(td_count) as td_count").order("date_trunc('day',td_time)")
-      else
-        #集計
-        tdtable = Tdtable.where(:td_time => startday .. endday).group("date_trunc('day',td_time)").select("date_trunc('day',td_time) as td_time,sum(td_count) as td_count").order("date_trunc('day',td_time)")
-      end
-    elsif term == 3   #年:１ヶ月ごとのデータを表示する。
-      if graph.analysis_type == 1  #集計タイプ : graph.analysis_type 0:集計、1:平均
-        #平均
-        tdtable = Tdtable.where(:td_time => startday .. endday).group("date_trunc('month',td_time)").select("date_trunc('month',td_time) as td_time,avg(td_count) as td_count").order("date_trunc('month',td_time)")
-      else
-        #集計
-        tdtable = Tdtable.where(:td_time => startday .. endday).group("date_trunc('month',td_time)").select("date_trunc('month',td_time) as td_time,sum(td_count) as td_count").order("date_trunc('month',td_time)")
-      end
-    else   #0か指定なしは１日の集計 : 時間別データを表示する
-      if graph.analysis_type == 1  #集計タイプ : graph.analysis_type 0:集計、1:平均
-        #平均
-        tdtable = Tdtable.where(:td_time => startday .. endday).group("date_trunc('hour',td_time)").select("date_trunc('hour',td_time) as td_time,avg(td_count) as td_count").order("date_trunc('hour',td_time)")
-      else
-        #集計
-        tdtable = Tdtable.where(:td_time => startday .. endday).group("date_trunc('hour',td_time)").select("date_trunc('hour',td_time) as td_time,sum(td_count) as td_count").order("date_trunc('hour',td_time)")
-      end
-    end
-    return tdtable
-  end
-  #----------------------------------------------------------- #
-  # グラフ表示期間の設定
-  def set_graph_term(graph_term,today,addcnt)
-    case graph_term
-    when 0 # 日の時間別のデータを表示する
-      today = today + addcnt.to_i.days # 追加日数
-      oldday = today
-      term_s = today.month.to_s + t("datetime.prompts.month") + today.day.to_s + t("datetime.prompts.day")
-      graphx = t("datetime.prompts.hour")
-      stime = "%H"
-    when 1  # 週:７日分の日別データを表示する
-      today = today + (addcnt.to_i * 7).days # 追加日数
-      # 月曜日から開始するように調整
-      today = today + (7-today.wday).days
-      oldday = today - 6.days
-      term_s = oldday.month.to_s + t("datetime.prompts.month") + oldday.day.to_s + t("datetime.prompts.day") + " - " + today.month.to_s + t("datetime.prompts.month") + today.day.to_s + t("datetime.prompts.day")
-      graphx = t("datetime.prompts.day")
-      stime = "%d"
-    when 2  # 月:１ヶ月分のデータを表示する
-      today = today + addcnt.to_i.months # 追加日数
-      # 月初から開始するように調整
-      nowmonth = Date::new(today.year,today.month, 1)
-      today = nowmonth >> 1
-      today = today - 1.day
-      oldday = nowmonth
-      term_s = oldday.year.to_s + t("datetime.prompts.year") + oldday.month.to_s + t("datetime.prompts.month")
-      graphx = t("datetime.prompts.day")
-      stime = "%d"
-    when 3  # 年:１ヶ月ごとのデータを表示する。
-      today = today + addcnt.to_i.years # 追加日数
-      # 年初から開始するように調整
-      nowyear = Date::new(today.year,1, 1)
-      today = nowyear + 1.year - 1.day
-      oldday = nowyear
-      term_s = oldday.year.to_s + t("datetime.prompts.year")
-      graphx = t("datetime.prompts.month")
-      stime = "%m"
-    end
-    # 戻り値準備
-    res = Hash.new
-    res['today'] = today
-    res['oldday'] = oldday
-    res['term_s'] = term_s
-    res['graphx'] = graphx
-    res['stime'] = stime
-    return res
-  end
-=end
   # ----------------------------------------------------------- #
   # データの取得
   def get_table_data(graph,term,psday,peday)
@@ -142,17 +58,6 @@ class ApplicationController < ActionController::Base
   def set_graph_data(tdtable,graph_term)
     xdata = []
     ydata = []
-#    graphx = ""
-#    case graph_term
-#      when 0 # hour
-#        graphx = t("datetime.prompts.hour")
-#      when 1 # day
-#        graphx = t("datetime.prompts.day")
-#      when 2 # week
-#        graphx = t("datetime.prompts.day")
-#      else #month
-#        graphx = t("datetime.prompts.month")
-#    end
     cnt   = 0
     tdtable.each{|row|
       date = DateTime.strptime(row.td_time.to_s, "%Y-%m-%d %H:%M:%S")
@@ -174,13 +79,11 @@ class ApplicationController < ActionController::Base
     res = Hash.new
     res['xdata'] = xdata
     res['ydata'] = ydata
-#    res['graphx'] = graphx
     return res
   end
   # ----------------------------------------------------------- #
   # 表示期間の取得
   def getStartDay # 開始日
-    #startday = Setting.find_by_name('base_start')
     startday = $settings['base_start']
     if startday then
       res = Date.parse(startday)
@@ -193,7 +96,6 @@ class ApplicationController < ActionController::Base
   end
   # ----------------------------------------------------------- #
   def getEndDay # 終了日
-    #endday = Setting.find_by_name('base_end')
     endday = $settings['base_end']
     if endday then
       res = Date.parse(endday)
@@ -397,11 +299,6 @@ class ApplicationController < ActionController::Base
     p "★★table_data_update★★★★★★★★★★★★★★★★"
     # データの更新
     Tdtable.table_name = td_name
-#    if update_days > 0
-#      Tdtable.delete_all(['analysis_type = ? and td_time >= ?',graph.analysis_type,(Date.today - update_days.days)])
-#    else
-#      Tdtable.delete_all(['analysis_type = ?',graph.analysis_type])
-#    end
     tdtable.each{|row|
       tt = Tdtable.where(:analysis_type=>graph.analysis_type,:td_time=>row.td_time)
       if tt.size > 0

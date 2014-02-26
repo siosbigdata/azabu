@@ -16,7 +16,7 @@ class AdminController < ApplicationController
   # 管理者ログインチェック
   def admin_authorize
     unless admin_current_user
-      flash[:notice] = I18n.t('login_notice')
+      flash[:notice] = I18n.t('login.notice')
       session[:jumpto] = request.parameters
       redirect_to admin_login_index_path
     end

@@ -9,7 +9,7 @@
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count,"error" )%> <%= t('error_user_message') %></h2>
+      <h2><%= pluralize(@user.errors.count,"error" )%> <%= t('error.user.message') %></h2>
       <ul>
         <% @user.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>

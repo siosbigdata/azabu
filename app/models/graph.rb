@@ -13,6 +13,4 @@
 # == 注意
 # nameはTreasureData用データモデルのテーブル名とそろえる
 class Graph < ActiveRecord::Base
-  # アソシエーション
-  has_many :groupgraph
 end

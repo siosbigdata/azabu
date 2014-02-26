@@ -98,6 +98,10 @@ ja:
     over_csv: 今月のCSVダウンロード最大容量を超過しました。
     graph_name: 「td_」をのぞいた存在するテーブル名を指定してください。
     graph_new: 新規作成前にあらかじめデータベースに「td_XXXX」という名前のテーブルを作成する必要があります。
+    password:
+      reset:
+        title: パスワードの更新
+        mail: パスワードを変更する場合は下記のURLをクリックしてください。
     setting:
       success: 更新しました。
     error:
