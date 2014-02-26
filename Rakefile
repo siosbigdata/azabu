@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Shirokane::Application.load_tasks
+Azabu::Application.load_tasks
