@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # GraphsController
 # Author:: Kazuko Ohmura
 # Date:: 2013.07.25
@@ -7,7 +7,6 @@
 class Admin::GraphsController < AdminController
   before_filter :admin_authorize, :except => :login #ログインしていない場合はログイン画面に移動
   before_action :set_admin_graph, only: [:show, :edit, :update]
-  before_action :set_select_items, only: [:index, :show,:edit, :update,:new,:create]
 
   # グラフ一覧画面
   def index
@@ -27,9 +26,6 @@ class Admin::GraphsController < AdminController
     @admin_graph.term = Graph::DAY   # 2
     @admin_graph.linewidth = 2  # 線の太さ
     @admin_graph.y_min = 0 # Y軸最小値
-#    @admin_graph.y_max_time = 100   # Y軸最大値-時
-#    @admin_graph.y_max_day = 100    # Y軸最大値-日
-#    @admin_graph.y_max_month = 100  # Y軸最大値-月
   end
 
   # グラフ新規作成
@@ -69,22 +65,6 @@ class Admin::GraphsController < AdminController
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_graph
       @admin_graph = Admin::Graph.find(params[:id])
-    end
-
-    #選択肢の設定
-    def set_select_items
-      @h_analysis_types = {0 => t('select.analysis_types.sum'),1 => t('select.analysis_types.avg')}
-      @h_graph_types = {0 => t('select.graph_types.line'),1 => t('select.graph_types.bar')}
-      @h_terms ={Graph::HOUR=> t('datetime.prompts.hour'),Graph::DAY => t('datetime.prompts.day'),Graph::WEEK => t('term.week'),Graph::MONTH => t('datetime.prompts.month')}
-      @h_yesno={0=> t('title.valno'),1 => t('title.valyes')}
-      @h_template = Hash.new()
-      tmp = Admin::Graphtemplate.all.order(:name)
-      tmp.each do |tt|
-        @h_template[tt.name.to_s] = tt.name.to_s
-      end
-
-#      @merge = get_use_merge_graph  # グラフのマージ機能を利用させるかどうか
-      @usecreate = get_use_create_graph # グラフの新規追加機能を利用させるかどうか
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

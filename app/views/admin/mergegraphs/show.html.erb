@@ -14,12 +14,12 @@
 
 <p>
   <strong><%= t('title.graph.title')%></strong>
-  <%= @graphs[@mergegraph.graph_id] %>
+  <%= Graph::graph_hash[@mergegraph.graph_id] %>
 </p>
 
 <p>
   <strong><%= t('title.merge.side')%></strong>
-  <%= @side[@mergegraph.side] %>
+  <%= Mergegraph::SIDE[@mergegraph.side] %>
 </p>
 
 <p>

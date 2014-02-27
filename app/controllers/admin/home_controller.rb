@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # HomeController
 # Author:: Kazuko Ohmura
 # Date:: 2013.07.25

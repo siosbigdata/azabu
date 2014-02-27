@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # Merge Menu
 # Author:: Kazuko Ohmura
 # Date:: 2014.01.28
@@ -17,4 +17,10 @@
 # Menu.create(:group_id=>1,:parent_id => 1,:name => "graph1" , :title => "グラフ１",:vieworder => 2,:icon => "icon-picture",:menutype => 2)
 
 class Menu < ActiveRecord::Base
+  SELECT = {
+    0 => I18n.t("admin.menu.type.label"),
+    1 => I18n.t("admin.menu.type.dashboard"),
+    2 => I18n.t("admin.menu.type.graph"),
+    3 => I18n.t("admin.menu.type.merge"),
+  }
 end

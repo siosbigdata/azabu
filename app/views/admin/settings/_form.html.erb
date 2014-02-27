@@ -20,11 +20,11 @@
 	<% if @admin_setting.name == "graph_width" || @admin_setting.name == "graph_height" %>
 		<%= f.number_field :parameter,{:min => 200,:max => 1024} %>
 	<% elsif @admin_setting.name == "week_startday" %>
-		<%= f.select :parameter,@select_week %>
+		<%= f.select :parameter,Setting::get_weeks %>
 	<% elsif @admin_setting.name == "base_term" %>
-		<%= f.select :parameter,@h_terms.keys.map{|t| [@h_terms[t], t]} %>
+		<%= f.select :parameter,Graph::TERMS.keys.map{|t| [Graph::TERMS[t], t]} %>
 	<% elsif @admin_setting.columntype == 2 %>
-        <%= f.select :parameter,@select_yes_no.keys.map{|t| [@select_yes_no[t],t]} %>
+        <%= f.select :parameter,Graph::YESNO.keys.map{|t| [Graph::YESNO[t],t]} %>
     <% elsif @admin_setting.columntype == 3 %>
         <%= f.number_field :parameter,{:min => 1,:max => 9} %>
     <% elsif @admin_setting.columntype == 4 %>

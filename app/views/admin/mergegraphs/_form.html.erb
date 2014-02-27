@@ -22,7 +22,7 @@
   </div>
   <div class="field">
     <%= f.label :side %><br>
-    <%= f.select :side,@side.keys.map{|t| [@side[t], t]} %>
+    <%= f.select :side,Mergegraph::SIDE.keys.map{|t| [Mergegraph::SIDE[t], t]} %>
   </div>
   <div class="field">
     <%= f.label :y %><br>

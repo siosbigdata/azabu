@@ -25,7 +25,7 @@
 	      <tr>
 	        <td><%= link_to admin_menu.name, edit_admin_menu_path(admin_menu) %></td>
 	        <td><%= admin_menu.title %></td>
-	        <td><%= @select_type[admin_menu.menutype] %></td>
+	        <td><%= Menu::SELECT[admin_menu.menutype] %></td>
 	        <td><%= @parent_menu[admin_menu.parent_id] %></td>
 	        <td><i class="<%= admin_menu.icon %>"></i></td>
 	        <td><%= admin_menu.vieworder %></td>

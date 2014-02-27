@@ -23,17 +23,17 @@
       <tr>
         <td><%= link_to admin_graph.name, edit_admin_graph_path(admin_graph) %></td>
         <td><%= admin_graph.title %></td>
-        <td><%= @h_analysis_types[admin_graph.analysis_type] %></td>
-        <td><%= @h_graph_types[admin_graph.graph_type] %></td>
-        <td><%= @h_terms[admin_graph.term] %></td>
+        <td><%= Graph::ANALYSIS[admin_graph.analysis_type] %></td>
+        <td><%= Graph::TYPES[admin_graph.graph_type] %></td>
+        <td><%= Graph::TERMS[admin_graph.term] %></td>
         <td><%= admin_graph.y %></td>
-        <td><%= @h_template[admin_graph.template] %></td>
+        <td><%= Graph::get_templates[admin_graph.template] %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <br />
-<% if @usecreate %>
+<% if Admin::Graph::get_use_create_graph %>
 <%= link_to t('label.new'), new_admin_graph_path,:class=>"button_link" %>
 <% end %>
 

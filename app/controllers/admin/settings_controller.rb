@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # Admin::Settings Controller
 # Author:: Kazuko Ohmura
 # Date:: 2013.07.30
@@ -7,7 +7,6 @@
 class Admin::SettingsController < AdminController
   before_filter :admin_authorize, :except => :login #ログインしていない場合はログイン画面に移動
   before_action :set_admin_setting, only: [:show, :edit, :update]
-  before_action :set_select_setting, only: [:index,:show, :edit, :update]
 
   # 管理用パラメーター一覧
   def index
@@ -42,19 +41,6 @@ class Admin::SettingsController < AdminController
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_setting
       @admin_setting = Admin::Setting.find(params[:id])
-    end
-
-    # 選択肢設定
-    def set_select_setting
-      @select_yes_no ={"yes"=>"yes","no"=>"no"}
-
-      @week = I18n.t 'date.day_names'
-      @select_week = Hash::new
-      for num in 0..6 do
-        @select_week[@week[num]] = num
-      end
-
-      @h_terms ={0=> t('datetime.prompts.hour'),1 => t('datetime.prompts.day'),2 => t('term.week'),3 => t('datetime.prompts.month'),4 => t('datetime.prompts.year')}
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

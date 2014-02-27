@@ -4,7 +4,7 @@
 
 <div id="content">
 <div id="sub_content">
-	<h1><i class="<%= @gmenu.icon %>"></i>&nbsp;<%= @graph.title %>&nbsp;-&nbsp;<%= @h_analysis_types[@graph.analysis_type] %>
+	<h1><i class="<%= @gmenu.icon %>"></i>&nbsp;<%= @graph.title %>&nbsp;-&nbsp;<%= Graph::ANALYSIS[@graph.analysis_type] %>
 	</h1>
 </div>
 <div id="search">
@@ -23,10 +23,10 @@
 
 </div>
 <div id="term_button" class="data_btn">
-	<a href="<%= graph_path(@graph.id)%>?term=0&sday=<%= @sdayval %>&eday=<%= @edayval %>" class="term_button <% if @graph_term == 0  %>select<% end %>"><%= t('term.hour') %></a>
-	<a href="<%= graph_path(@graph.id)%>?term=1&sday=<%= @sdayval %>&eday=<%= @edayval %>" class="term_button <% if @graph_term == 1  %>select<% end %>"><%= t('term.day') %></a>
-	<a href="<%= graph_path(@graph.id)%>?term=2&sday=<%= @sdayval %>&eday=<%= @edayval %>" class="term_button <% if @graph_term == 2  %>select<% end %>"><%= t('term.week') %></a>
-	<a href="<%= graph_path(@graph.id)%>?term=3&sday=<%= @sdayval %>&eday=<%= @edayval %>" class="term_button <% if @graph_term == 3  %>select<% end %>"><%= t('term.month') %></a>
+	<a href="<%= graph_path(@graph.id)%>?term=0&sday=<%= @sdayval %>&eday=<%= @edayval %>" class="term_button <% if @graph_term == 0  %>select<% end %>"><%= Graph::TERMS[Graph::HOUR] %></a>
+	<a href="<%= graph_path(@graph.id)%>?term=1&sday=<%= @sdayval %>&eday=<%= @edayval %>" class="term_button <% if @graph_term == 1  %>select<% end %>"><%= Graph::TERMS[Graph::DAY] %></a>
+	<a href="<%= graph_path(@graph.id)%>?term=2&sday=<%= @sdayval %>&eday=<%= @edayval %>" class="term_button <% if @graph_term == 2  %>select<% end %>"><%= Graph::TERMS[Graph::WEEK] %></a>
+	<a href="<%= graph_path(@graph.id)%>?term=3&sday=<%= @sdayval %>&eday=<%= @edayval %>" class="term_button <% if @graph_term == 3  %>select<% end %>"><%= Graph::TERMS[Graph::MONTH] %></a>
 	<% if @csvflg  %>
 	<a href="<%= graph_path(@graph.id)%>/csvexport?sday=<%= @sdayval %>&eday=<%= @edayval %>" class="csv_btn"><i class="icon-download-alt"></i>&nbsp;csv</a>
 	<% else %>
@@ -45,8 +45,8 @@ var chartdata = {
     "useMarker": "<%= $settings['useMarker'] %>",
     "markerWidth": <%= $settings['markerWidth'] %>,
     <% end %>
-    "type": "<%= @graph_types[@graph.graph_type] %>",
-    "useVal": "<%= @h_yesno[@graph.useval] %>",
+    "type": "<%= Graph::TYPES_EN[@graph.graph_type] %>",
+    "useVal": "<%= Graph::YESNO_EN[@graph.useval] %>",
     "useShadow":"no",
     "lineWidth": <%= @graph.linewidth %>,
     "unit":"<%= @graph.y_unit %>",

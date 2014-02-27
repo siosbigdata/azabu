@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # Admin::Setting Model
 # Author:: Kazuko Ohmura
 # Date:: 2013.07.30

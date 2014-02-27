@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # Tableupdate Model
 # Author:: Kazuko Ohmura
 # Date:: 2014.02.21

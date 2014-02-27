@@ -21,8 +21,8 @@
   <tbody>
     <% @mergegraphs.each do |mergegraph| %>
       <tr>
-      	<td><%= link_to @graphs[mergegraph.graph_id], edit_admin_mergegraph_path(mergegraph) %></td>
-        <td><%= @side[mergegraph.side] %></td>
+      	<td><%= link_to Graph::graph_hash[mergegraph.graph_id], edit_admin_mergegraph_path(mergegraph) %></td>
+        <td><%= Mergegraph::SIDE[mergegraph.side] %></td>
         <td><%= mergegraph.y %></td>
         <td><%= mergegraph.vieworder %></td>
         <td><%= link_to t('label.delete'), mergegraph, method: :delete, data: { confirm: t('message.delete') } %></td>

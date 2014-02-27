@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # Admin MergesController
 # Author:: Kazuko Ohmura
 # Date:: 2014.01.29
@@ -6,7 +6,6 @@
 class Admin::MergesController < AdminController
   before_filter :admin_authorize, :except => :login #ログインしていない場合はログイン画面に移動
   before_action :set_merge, only: [:show, :edit, :update, :destroy]
-  before_action :set_select, only: [:show, :edit, :update, :index,:new,:create]
 
   # GET /merges
   # GET /merges.json
@@ -72,10 +71,6 @@ class Admin::MergesController < AdminController
     # Use callbacks to share common setup or constraints between actions.
     def set_merge
       @admin_merge = Admin::Merge.find(params[:id])
-    end
-    
-    def set_select
-      @h_terms ={Graph::HOUR=> t('datetime.prompts.hour'),Graph::DAY => t('datetime.prompts.day'),Graph::WEEK => t('term.week'),Graph::MONTH => t('datetime.prompts.month')}
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

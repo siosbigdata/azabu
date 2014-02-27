@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # DashboardsController
 # Author:: Kazuko Ohmura
 # Date:: 2013.07.31
@@ -14,10 +14,7 @@ class DashboardsController < PublichtmlController
       
     @menu_dashboard_id = params[:id]
     @dmenu = Menu.find(params[:id])              
-    # 値設定
-    @h_yesno = {0=>'no' , 1 => 'yes'}
-    # グラフ選択枝
-    @graph_types = ['line','bar']
+
     # 表示期間の設定
     # 開始日付
     @sday = Graph::getStartDay

@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  password_digest: MyString
-  title: MyString
-  mail: MyString
+  name: Taro
+  password_digest: abcdefg123456789
+  title: Taro
+  mail: taro@test.com
   group_id: 1
-  admin: false
+  admin: true
 
 two:
-  name: MyString
-  password_digest: MyString
-  title: MyString
-  mail: MyString
+  name: Hanako
+  password_digest: abcdefg123456789
+  title: Hanako
+  mail: hanako@test.com
   group_id: 1
   admin: false

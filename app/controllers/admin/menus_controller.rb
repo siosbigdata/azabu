@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # Admin MenusController
 # Author:: Kazuko Ohmura
 # Date:: 2014.01.29
@@ -6,7 +6,6 @@
 class Admin::MenusController < AdminController
   before_filter :admin_authorize, :except => :login #ログインしていない場合はログイン画面に移動
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
-  before_action :set_select, only: [:show, :edit, :list, :new,:create,:update]
 
   # 一覧表示
   def list
@@ -95,10 +94,6 @@ class Admin::MenusController < AdminController
       @group = Admin::Group.find(group_id)
     end
 
-    def set_select
-#      @select_level = {0 => t("admin.menu.level.root"),1=>t("admin.menu.level.level1"),2=>t("admin.menu.level.level2")}
-      @select_type = {0 => t("admin.menu.type.label"),1 => t("admin.menu.type.dashboard"),2 => t("admin.menu.type.graph"),3 => t("admin.menu.type.merge")}
-    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def menu_params
       params.require(:admin_menu).permit(:group_id, :parent_id, :child_id, :name, :title, :vieworder, :icon, :menutype)

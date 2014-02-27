@@ -29,7 +29,7 @@
    
     <div class="field">
     <%= f.label :menutype %><br>
-    <%= f.select :menutype,@select_type.keys.map{|t| [@select_type[t], t]} %>
+    <%= f.select :menutype,Menu::SELECT.keys.map{|t| [Menu::SELECT[t], t]} %>
   </div>
   <div class="field">
     <%= f.label :parent_id %><br>

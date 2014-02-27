@@ -23,7 +23,7 @@
       <tr>
         <td><%= link_to admin_merge.name, edit_admin_merge_path(admin_merge) %></td>
         <td><%= admin_merge.title %></td>
-        <td><%= @h_terms[admin_merge.term] %></td>
+        <td><%= Graph::TERMS[admin_merge.term] %></td>
         <td><%= link_to t('title.merge.graph'), list_admin_mergegraph_path(admin_merge) %></td>
         <td><%= link_to t('label.delete'), admin_merge, method: :delete, data: { confirm: t('message.delete') } %></td>
       </tr>

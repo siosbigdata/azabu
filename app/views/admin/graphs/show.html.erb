@@ -18,17 +18,17 @@
 
 <p>
   <strong><%= t('title.graph.analysis_type') %></strong>
-  <%= @h_analysis_types[@admin_graph.analysis_type] %>
+  <%= Graph::ANALYSIS[@admin_graph.analysis_type] %>
 </p>
 
 <p>
   <strong><%= t('title.graph.graph_type') %></strong>
-  <%= @h_graph_types[@admin_graph.graph_type] %>
+  <%= Graph::TYPES[@admin_graph.graph_type] %>
 </p>
 
 <p>
   <strong><%= t('title.graph.term') %></strong>
-  <%= @h_terms[@admin_graph.term] %>
+  <%= Graph::TERMS[@admin_graph.term] %>
 </p>
 
 <p>
@@ -46,11 +46,11 @@
 </p>
 <p>
   <strong><%= t('title.graph.useval') %></strong>
-  <%= @h_yesno[@admin_graph.useval] %>
+  <%= Graph::YESNO[@admin_graph.useval] %>
 </p>
 <p>
   <strong><%= t('title.graph.usetip') %></strong>
-  <%= @h_yesno[@admin_graph.usetip] %>
+  <%= Graph::YESNO[@admin_graph.usetip] %>
 </p>
 <p>
   <strong><%= t('title.graph.linewidth') %></strong>
@@ -59,7 +59,7 @@
 
 <p>
   <strong><%= t('title.graph.template') %></strong>
-  <%= @h_template[@admin_graph.template] %>
+  <%= Graph::get_templates[@admin_graph.template] %>
 </p>
 <br /><br />
 <%= link_to t('label.back'), admin_graphs_path,:class=>"button_link" %>

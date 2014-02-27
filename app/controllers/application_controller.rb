@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # ApplicationController
 # Author:: Kazuko Ohmura
 # Date:: 2013.07.25
@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   def get_settings
     if $settings == nil
       ss = Setting.all
-      $settings = Hash.new()
+      $settings = {}
       ss.map{|s|
         $settings[s.name.to_s] = s.parameter.to_s
       }

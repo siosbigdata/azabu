@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # Admin::Graph Model
 # Author:: Kazuko Ohmura
 # Date:: 2013.07.25
@@ -25,5 +25,18 @@ class Admin::Graph < Graph
   validates :usetip, :presence => true,:numericality => true    # グラフにチップをつけるかどうか
   validates :linewidth, :presence => true,:numericality => {:only_integer => true} # 線の太さ
   validates :template, :presence => true                        # テンプレート名
+  
+  class << self
+    # グラフの新規追加機能を利用させるかどうか
+    def get_use_create_graph
+      res = false
+      if $settings['use_create_graph'] 
+        if $settings['use_create_graph'].to_i == 1
+          res = true
+        end
+      end
+      return res
+    end
+  end
 end
 

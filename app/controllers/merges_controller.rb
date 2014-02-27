@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # UsersController
 # Author:: Kazuko Ohmura
 # Date:: 2014.02.24
@@ -33,13 +33,7 @@ class MergesController < PublichtmlController
   
   # 引数の取得
   flash = params[:flash]
-    
-  # 値設定
-  @h_analysis_types = {0 => t('select.analysis_types.sum'),1 => t('select.analysis_types.avg')}
-  @h_yesno = {0=>'no' , 1 => 'yes'}
-  
-  # グラフ選択枝
-  @graph_types = ['line','bar']
+
   # マージ情報
   @merge = Merge.find(params[:id])
         
@@ -127,16 +121,7 @@ class MergesController < PublichtmlController
   }
 
   @xdata = xdata[0]
-  case @merge_term
-    when Graph::HOUR
-    @graphx = t("datetime.prompts.hour")
-    when Graph::DAY
-    @graphx = t("datetime.prompts.day")
-    when Graph::WEEK
-    @graphx = t("datetime.prompts.day")
-    else #month
-    @graphx = t("datetime.prompts.month")
-  end
+  @graphx = Graph::TERMS[@graph_term]
 end
 
   private

@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # GroupsController
 # Author:: Kazuko Ohmura
 # Date:: 2013.07.25
@@ -69,9 +69,6 @@ class Admin::GroupsController < AdminController
 
   # グループ削除
   def destroy
-    # 削除前に関連するテーブルの削除を行う
-    #Admin::Groupgraph.delete_all(:group_id => @admin_group.id)     #グループ-グラフ
-
     @admin_group.destroy
     respond_to do |format|
       format.html { redirect_to admin_groups_url }

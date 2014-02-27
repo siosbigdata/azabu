@@ -10,7 +10,7 @@ class UsersController < PublichtmlController
     def edit
       @user = current_user
     end
-  
+
     # 更新処理
     def update
       @user = current_user

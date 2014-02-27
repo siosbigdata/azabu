@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # Admin MergegraphsController
 # Author:: Kazuko Ohmura
 # Date:: 2014.01.29
@@ -6,7 +6,6 @@
 class Admin::MergegraphsController < AdminController
   before_filter :admin_authorize, :except => :login #ログインしていない場合はログイン画面に移動
   before_action :set_mergegraph, only: [:show, :edit, :update]
-  before_action :set_select, only: [:show, :edit, :update, :new,:create,:list]
   
   # 一覧表示
     def list
@@ -87,15 +86,6 @@ class Admin::MergegraphsController < AdminController
       @mergegraph = Admin::Mergegraph.find(params[:id])
       merge_id = @mergegraph.merge_id
       @merge = Admin::Merge.find(merge_id)
-    end
-    
-    def set_select
-      @side = {0 => t("admin.mergegraph.side.left"),1 => t("admin.mergegraph.side.right")}
-      gg = Admin::Graph.all
-      @graphs = Hash::new
-      gg.each{|g|
-        @graphs[g.id] = g.title
-      }
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

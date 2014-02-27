@@ -20,9 +20,9 @@
 	      <tr>
 	        <td><%= link_to admin_setting.title, edit_admin_setting_path(admin_setting) %></td>
 	        <% if admin_setting.name == "week_startday" %>
-	        	<td><%= @week[admin_setting.parameter.to_i] %></td>
+	        	<td><%= Setting::WEEK[admin_setting.parameter.to_i] %></td>
 	        <% elsif admin_setting.name == "base_term" %>
-	        	<td><%= @h_terms[admin_setting.parameter.to_i] %></td>
+	        	<td><%= Graph::TERMS[admin_setting.parameter.to_i] %></td>
 	        <% else %>
 	        	<td><%= admin_setting.parameter %></td>
 	        <% end %>

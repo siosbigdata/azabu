@@ -35,7 +35,7 @@ var chartdata = {
 	</div>
 	<script>
 	var canvas<%= graph.id %> = $j.extend(true, {}, chartdata);
-	canvas<%= graph.id %>.config.type = "<%= @graph_types[graph.graph_type] %>";
+	canvas<%= graph.id %>.config.type = "<%= Graph::TYPES_EN[graph.graph_type] %>";
 	canvas<%= graph.id %>.config.bgGradient = {"direction":"vertical","from":"<%= @templates[i].bgfrom %>","to":"<%= @templates[i].bgto %>"};
 	canvas<%= graph.id %>.config.textColor = "<%= @templates[i].textcolor %>";
 	canvas<%= graph.id %>.config.minY = <%= graph.y_min %>;

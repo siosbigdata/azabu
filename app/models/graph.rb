@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # Graph Model
 # Author:: Kazuko Ohmura
 # Date:: 2013.07.25
@@ -19,9 +19,51 @@ class Graph < ActiveRecord::Base
   WEEK = 2
   MONTH = 3
   
+  ANALYSIS = {
+    0 => I18n.t('select.analysis_types.sum'),
+    1 => I18n.t('select.analysis_types.avg'),
+  }
+  TYPES = {
+    0 => I18n.t('select.graph_types.line'),
+    1 => I18n.t('select.graph_types.bar'),
+  }
+  TYPES_EN = ['line','bar']
+  TERMS ={
+    Graph::HOUR=> I18n.t('datetime.prompts.hour'),
+    Graph::DAY => I18n.t('datetime.prompts.day'),
+    Graph::WEEK => I18n.t('term.week'),
+    Graph::MONTH => I18n.t('datetime.prompts.month'),
+  }
+  YESNO={
+    0 => I18n.t('title.valno'),
+    1 => I18n.t('title.valyes'),
+  }
+  YESNO_EN={
+    0 => 'no',
+    1 => 'yes',
+  }
+  
   # ----------------------------------------------------------- #
   # クラスメソッド
   class << self
+    # ----------------------------------------------------------- #
+    def graph_hash
+      gg = Admin::Graph.all
+      graphs = {}
+      gg.each{|g|
+        graphs[g.id] = g.title
+      }
+      return graphs
+    end
+    # ----------------------------------------------------------- #
+    def get_templates
+      res = {}
+      tmp = Admin::Graphtemplate.all.order(:name)
+      tmp.each {|tt|
+        res[tt.name.to_s] = tt.name.to_s
+      }
+      return res
+    end
     # ----------------------------------------------------------- #
     # テーブル名取得
     def get_td_tablename(name)
@@ -78,7 +120,7 @@ class Graph < ActiveRecord::Base
       }
   
       # 戻り値の作成
-      res = Hash.new
+      res = {}
       res['xdata'] = xdata
       res['ydata'] = ydata
       return res

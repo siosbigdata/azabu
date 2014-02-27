@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # UsersController
 # Author:: Kazuko Ohmura
 # Date:: 2013.07.31
@@ -77,16 +77,9 @@ class GraphsController < PublichtmlController
     return redirect_to root_path if !check_graph_permission(params[:id])
     # 引数の取得
     flash = params[:flash]
-      
-    # 値設定
-    @h_analysis_types = {0 => t('select.analysis_types.sum'),1 => t('select.analysis_types.avg')}
-    @h_yesno = {0=>'no' , 1 => 'yes'}
-    
+
     # CSVダウンロードボタン用フラグ
     @csvflg = check_csv_size
-    
-    # グラフ選択枝
-    @graph_types = ['line','bar']
           
     # 指定グラフ情報
     @graph = Graph.find(params[:id])
@@ -138,20 +131,8 @@ class GraphsController < PublichtmlController
     res_graph_data = Graph::set_graph_data(tdtable,@graph_term)
     @xdata = res_graph_data['xdata']
     @ydata = res_graph_data['ydata']
-    case @graph_term
-      when Graph::HOUR
-      @graphx = t("datetime.prompts.hour")
-      when Graph::DAY
-      @graphx = t("datetime.prompts.day")
-      when Graph::WEEK
-      @graphx = t("datetime.prompts.day")
-      else #month
-      @graphx = t("datetime.prompts.month")
-    end
-p @xdata
-p @ydata
+    @graphx = Graph::TERMS[@graph_term]
   end
-
 
   private
   # グラフが利用可能かをチェックする
@@ -159,7 +140,7 @@ p @ydata
     gf = Graph.find(id)
     return Menu.exists?({:group_id=>current_user.group.id,:name=>gf.name,:menutype=>2}) 
   end
-  
+
   # 今月のCSVダウンロード容量チェック
   def check_csv_size
     if get_csv_size.to_i > $settings['csvdownloadsize'].to_i 
@@ -169,7 +150,7 @@ p @ydata
     end
     return res
   end
-  
+
   # 今月のCSVダウンロード容量取得
   def get_csv_size
     today = Date.today # 今月の日付
@@ -191,6 +172,4 @@ p @ydata
     end
     return res
   end
-  
-  
 end

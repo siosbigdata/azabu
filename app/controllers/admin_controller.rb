@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # AdminController
 # Author:: Kazuko Ohmura
 # Date:: 2013.08.02
@@ -43,15 +43,6 @@ class AdminController < ApplicationController
     return res
   end
   
-  # グラフの新規追加機能を利用させるかどうか
-  def get_use_create_graph
-    res = false
-    if $settings['use_create_graph'] 
-      if $settings['use_create_graph'].to_i == 1
-        res = true
-      end
-    end
-    return res
-  end
+  
 
 end

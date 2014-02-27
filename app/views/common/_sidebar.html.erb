@@ -42,7 +42,7 @@
 				<% end %>
 			<% elsif m.menutype === 2 #グラフ %>
 				<% gf = Graph.find_by_name(m.name) %>
-				<li <% if params[:id] == gf.id.to_s && @merge == nil && @menu_dashboard_id==nil %> class="select"<% end %>>
+				<li <% if params[:id] == gf.id.to_s && @graph && @merge == nil && @menu_dashboard_id==nil %> class="select"<% end %>>
 				<%= link_to(graph_path(gf.id)) do %>
 				<% for num in 0..level %>&nbsp;&nbsp;<% end %>
 				<i class="<%= m.icon %>"></i>
@@ -50,7 +50,7 @@
 				<% end %>
 			<% elsif m.menutype === 3 #マージ %>
 				<% mg = Merge.find_by_name(m.name) %>
-				<li <% if params[:id] == mg.id.to_s && @graph == nil && @menu_dashboard_id==nil %> class="select"<% end %>>
+				<li <% if params[:id] == mg.id.to_s && @merge && @graph == nil && @menu_dashboard_id==nil %> class="select"<% end %>>
 				<%= link_to(merge_path(mg.id)) do %>
 				<% for num in 0..level %>&nbsp;&nbsp;<% end %>
 				<i class="<%= m.icon %>"></i>

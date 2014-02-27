@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # Admin UsersController
 # Author:: Kazuko Ohmura
 # Date:: 2013.07.25

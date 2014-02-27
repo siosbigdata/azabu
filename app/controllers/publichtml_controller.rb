@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # PublichtmlController
 # Author:: Kazuko Ohmura
 # Date:: 2013.08.02

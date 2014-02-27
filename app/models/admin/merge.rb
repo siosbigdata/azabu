@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 # Merge Admin::Merge
 # Author:: Kazuko Ohmura
 # Date:: 2014.01.29

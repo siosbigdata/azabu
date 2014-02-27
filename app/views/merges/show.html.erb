@@ -45,8 +45,8 @@ var chartdata = {
     "useMarker": "<%= $settings['useMarker'] %>",
     "markerWidth": <%= $settings['markerWidth'] %>,
     <% end %>
-    "type": "<%= @graph_types[@graphsL[0].graph_type] %>",
-    "useVal": "<%= @h_yesno[@graphsL[0].useval] %>",
+    "type": "<%= Graph::TYPES_EN[@graphsL[0].graph_type] %>",
+    "useVal": "<%= Graph::YESNO_EN[@graphsL[0].useval] %>",
     "lineWidth": <%= @graphsL[0].linewidth %>,
     "unit":"<%= @graphsL[0].y_unit %>",
     "useShadow":"no",
@@ -74,12 +74,11 @@ for(var i=0;i<datas.length;i++){
 	chartdata.data[i+1] = datas[i];
 }
 chartdata.config.colorSet = dcolors;
-//ccchart.init('<%= @graph.name %>', chartdata);
 
 <% if @graphsR.size > 0 %>
 var chartdataR = $j.extend(true, {}, chartdata);
 //chartdataR.config.width += 20;
-chartdataR.config.type = "<%= @graph_types[@graphsR[0].graph_type] %>";
+chartdataR.config.type = "<%= Graph::TYPES_EN[@graphsR[0].graph_type] %>";
 chartdataR.config.minY = <%= @graphsR[0].y_min %> ;
 //chartdataR.config.colorSet = ["#FF0000"];
 chartdataR.config.unit = "<%= @graphsR[0].y_unit %>";

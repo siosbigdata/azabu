@@ -28,17 +28,17 @@
   </div>
   <div class="field">
     <%= f.label :analysis_type %><br>
-    <%= f.select :analysis_type,@h_analysis_types.keys.map{|t| [@h_analysis_types[t], t]} %>
+    <%= f.select :analysis_type,Graph::ANALYSIS.keys.map{|t| [Graph::ANALYSIS[t], t]} %>
   </div>
   
   <div class="field">
     <%= f.label :graph_type %><br>
-    <%= f.select :graph_type,@h_graph_types.keys.map{|t| [@h_graph_types[t], t]} %>
+    <%= f.select :graph_type,Graph::TYPES.keys.map{|t| [Graph::TYPES[t], t]} %>
   </div>
   
   <div class="field">
     <%= f.label :term %><br>
-    <%= f.select :term,@h_terms.keys.map{|t| [@h_terms[t], t]} %>
+    <%= f.select :term,Graph::TERMS.keys.map{|t| [Graph::TERMS[t], t]} %>
   </div>
   <div class="field">
     <%= f.label :y %><br>
@@ -54,11 +54,11 @@
   </div>
    <div class="field">
     <%= f.label :useval %><br>
-    <%= f.select :useval,@h_yesno.keys.map{|t| [@h_yesno[t], t]} %>
+    <%= f.select :useval,Graph::YESNO.keys.map{|t| [Graph::YESNO[t], t]} %>
   </div>
   <div class="field">
     <%= f.label :usetip %><br>
-    <%= f.select :usetip,@h_yesno.keys.map{|t| [@h_yesno[t], t]} %>
+    <%= f.select :usetip,Graph::YESNO.keys.map{|t| [Graph::YESNO[t], t]} %>
   </div>
    <div class="field">
     <%= f.label :linewidth %><br>
@@ -66,7 +66,7 @@
   </div>
    <div class="field">
     <%= f.label :template %><br>
-    <%= f.select :template,@h_template.keys.map{|t| [@h_template[t], t]} %>
+    <%= f.select :template,Graph::get_templates.keys.map{|t| [Graph::get_templates[t], t]} %>
   </div>
   <div class="actions">
     <%= f.submit t('helpers.submit.update'),:class=>"button_admin" %>

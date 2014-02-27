@@ -8,6 +8,6 @@ class GraphstableValidator<ActiveModel::EachValidator
   def validate_each(record,attribute,value)
     tbname = 'td_' + value
     Tdtable.table_name = tbname
-    record.errors.add(attribute, I18n.t('error_graph_table_exists_message')) unless Tdtable.table_exists?
+    record.errors.add(attribute, I18n.t('message.error.graph.table.exists.message')) unless Tdtable.table_exists?
   end
 end
