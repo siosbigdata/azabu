@@ -8,7 +8,6 @@ class DashboardsController < PublichtmlController
   before_filter :authorize, :except => :login #ログインしていない場合はログイン画面に移動
 
   def show
-    p "★★DashboardsController:show★★★★★★★★★★★★★★★★★★★"
     # チェック
     return redirect_to root_path if !Menu.exists?({:id=>params[:id],:group_id=>current_user.group.id,:menutype=>1})
       

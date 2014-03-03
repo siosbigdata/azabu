@@ -129,7 +129,7 @@ class Graph < ActiveRecord::Base
     # 表示期間の取得
     def getStartDay # 開始日
       startday = $settings['base_start']
-      if startday then
+      if startday && startday != "today" then
         res = Date.parse(startday)
       else
         # パラメーターが存在しない場合は今月の月初
@@ -141,7 +141,7 @@ class Graph < ActiveRecord::Base
     # ----------------------------------------------------------- #
     def getEndDay # 終了日
       endday = $settings['base_end']
-      if endday then
+      if endday && endday != "today" then
         res = Date.parse(endday)
       else
         # パラメーターが存在しない場合は今月の月末
@@ -152,8 +152,7 @@ class Graph < ActiveRecord::Base
     end
     # ----------------------------------------------------------- #
     # 時間別テーブルの更新
-    def update_hour_table(graph,update_days)
-      p "★★update_hour_table★★★★★★★★★★★★★★★★"
+    def update_hour_table(graph,start_day)
       td_name = "td_hour_"  
       td_name << graph.name
       
@@ -161,9 +160,10 @@ class Graph < ActiveRecord::Base
       Tdtable.table_name = get_td_tablename(graph.name)
       
       # データの最小日と最大日の取得
-      if update_days > 0
+      if start_day > 0
         eday = Date.today
-        sday = Date.today - update_days.days
+        #sday = Date.today - update_days.days
+        sday = Date.parse(start_day.to_s)
       else
         minrow = Tdtable.select("min(td_time) as td_time")
         sday = Date.parse(minrow[0].td_time.to_s)
@@ -197,8 +197,7 @@ class Graph < ActiveRecord::Base
     end
     # ----------------------------------------------------------- #
     # 日別テーブルの更新
-    def update_day_table(graph,update_days)
-      p "★★update_day_table★★★★★★★★★★★★★★★★"
+    def update_day_table(graph,start_day)
       td_name = "td_day_"  
       td_name << graph.name
       
@@ -206,9 +205,10 @@ class Graph < ActiveRecord::Base
       Tdtable.table_name = get_td_tablename(graph.name)
       
       # データの最小日と最大日の取得
-      if update_days > 0
+      if start_day > 0
         eday = Date.today
-        sday = Date.today - update_days.days
+        #sday = Date.today - update_days.days
+        sday = Date.parse(start_day.to_s)
       else
         minrow = Tdtable.select("min(td_time) as td_time")
         sday = Date.parse(minrow[0].td_time.to_s)
@@ -241,8 +241,7 @@ class Graph < ActiveRecord::Base
     end
     # ----------------------------------------------------------- #
     # 週別テーブルの更新
-    def update_week_table(graph,update_days)
-      p "★★update_week_table★★★★★★★★★★★★★★★★"
+    def update_week_table(graph,start_day)
       td_name = "td_week_"  
       td_name << graph.name
       
@@ -250,9 +249,9 @@ class Graph < ActiveRecord::Base
       Tdtable.table_name = get_td_tablename(graph.name)
       
       # データの最小日と最大日の取得
-      if update_days > 0
-        sday = Date.today
-        eday = (Date.today - (update_days*7).days)
+      if start_day > 0
+        sday = Date.parse(start_day.to_s)
+        eday = Date.today
       else
         minrow = Tdtable.select("min(td_time) as td_time")
         maxrow = Tdtable.select("max(td_time) as td_time")
@@ -292,8 +291,7 @@ class Graph < ActiveRecord::Base
     end
     # ----------------------------------------------------------- #
     # 月別テーブルの更新
-    def update_month_table(graph,update_days)
-      p "★★update_month_table★★★★★★★★★★★★★★★★"
+    def update_month_table(graph,start_day)
       td_name = "td_month_"  
       td_name << graph.name
       
@@ -301,9 +299,11 @@ class Graph < ActiveRecord::Base
       Tdtable.table_name = get_td_tablename(graph.name)
       
       # データの最小日と最大日の取得
-      if update_days > 0
+      if start_day > 0
         eday = Date.new(Date.today.year,Date.today.month,-1)
-        sday = Date.new((Date.today - update_days.days).year,(Date.today - update_days.days).month,1)
+        #sday = Date.new((Date.today - update_days.days).year,(Date.today - update_days.days).month,1)
+        ssday = Date.parse(start_day.to_s)
+        sday = Date.new(ssday.year,ssday.month,1)
       else
         minrow = Tdtable.select("min(td_time) as td_time")
         maxrow = Tdtable.select("max(td_time) as td_time")
@@ -340,7 +340,6 @@ class Graph < ActiveRecord::Base
     # ----------------------------------------------------------- #
     # データの更新
     def table_data_update(graph,td_name,tdtable,term)
-      p "★★table_data_update★★★★★★★★★★★★★★★★"
       # データの更新
       Tdtable.table_name = td_name
       tdtable.each{|row|
@@ -373,27 +372,24 @@ class Graph < ActiveRecord::Base
     # ----------------------------------------------------------- #
     # 集計テーブルの更新
     def update_table(graph,term)
-      p "★★update_table★★★★★★★★★★★★★★★★"
       # 更新日のチェック
       tu = Tableupdate.where(:graph_id=>graph.id,:term=>term,:analysis_type=>graph.analysis_type)
-      ud = $settings['update_days']
-      if ud
-        update_days = ud.to_i
-      else
-        update_days = 1
+      if tu
+        # 更新データあり
+        start_day = tu[0].cal_at
       end
       if tu.size == 0 || tu[0].cal_at.to_s < Date.today.to_s
-        update_days = -1 if tu.size == 0
+        start_day = -1 if tu.size == 0
         # 更新
         case term
         when 0
-          update_hour_table(graph,update_days)
+          update_hour_table(graph,start_day)
         when 1
-          update_day_table(graph,update_days)
+          update_day_table(graph,start_day)
         when 2
-          update_week_table(graph,update_days)
+          update_week_table(graph,start_day)
         else
-          update_month_table(graph,update_days)
+          update_month_table(graph,start_day)
         end
       end
     end

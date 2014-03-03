@@ -73,7 +73,7 @@ Setting.create(:name => "base_start" ,:title => "基準開始日",:parameter => 
 
 # 初期表示時点での表示期間の終了日
 # todayを指定すると特別にシステム当日、それ以外はyyyy-mm-dd表示
-Setting.create(:name => "base_end" ,:title => "基準終了日",:parameter => "2014-06-30" ,:vieworder => 91,:columntype => 4)
+Setting.create(:name => "base_end" ,:title => "基準終了日",:parameter => "today" ,:vieworder => 91,:columntype => 4)
 
 # 初期表示時点での表示期間
 Setting.create(:name => "base_term" ,:title => "基準期間",:parameter => "2" ,:vieworder => 92,:columntype => 1) # termの値を指定

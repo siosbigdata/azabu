@@ -27,7 +27,6 @@ class MergesController < PublichtmlController
   
   # マージ表示
   def show
-  p "★★merge:show★★★★★★★★★★★★★★★★★★★"
   # 表示可能グラフチェック
   return redirect_to root_path if !check_merge_permission(params[:id])
   

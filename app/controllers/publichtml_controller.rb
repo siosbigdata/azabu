@@ -39,7 +39,6 @@ class PublichtmlController < ApplicationController
 
   def search_child(pid)
     mchild = Menu.where(:group_id=>current_user.group.id,:parent_id => pid).order(:vieworder)
-    p mchild.size
     ary = Array::new
     mchild.each{|mm|
       ary.push(mm)

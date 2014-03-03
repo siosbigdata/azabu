@@ -31,7 +31,7 @@ class GraphsController < PublichtmlController
   # csv出力処理
   def csvexport
     # 表示可能グラフチェック
-    return redirect_to root_path if !check_graph_permission(params[:id]) 
+    return redirect_to root_url if !check_graph_permission(params[:id]) 
     # CSVダウンロード権限チェック
     return redirect_to graph_path if check_csv_size == false
 
@@ -72,9 +72,8 @@ class GraphsController < PublichtmlController
   
   # 表示用処理
   def show
-    p "★★show★★★★★★★★★★★★★★★★★★★"
     # 表示可能グラフチェック
-    return redirect_to root_path if !check_graph_permission(params[:id])
+    return redirect_to root_url if !check_graph_permission(params[:id])
     # 引数の取得
     flash = params[:flash]
 

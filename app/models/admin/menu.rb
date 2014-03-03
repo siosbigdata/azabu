@@ -13,5 +13,3 @@ class Admin::Menu < Menu
   validates :icon,  :presence => true
   validates :menutype,  :presence => true,:numericality=>true
 end
-
-#Menu.create(:group_id=>1,:level => 1,:parent_id => 0,:name => "dashboard" , :title => "ダッシュボード",:vieworder => 1,:icon => "icon-desktop",:menutype => 1)

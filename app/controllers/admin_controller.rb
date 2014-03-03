@@ -42,7 +42,4 @@ class AdminController < ApplicationController
     end
     return res
   end
-  
-  
-
 end
